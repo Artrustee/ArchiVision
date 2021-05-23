@@ -52,6 +52,8 @@
     <Reference Include="MaterialDesignThemes.Wpf">
       <HintPath>..\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="RhinoCommon">
       <HintPath>..\RhinoCommon.dll</HintPath>
     </Reference>
@@ -66,10 +68,78 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchiVisionInfo.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Params\UIElementGoo.cs" />
+    <Compile Include="Params\UIElementParameter.cs" />
+    <Compile Include="Params\WindowGoo.cs" />
+    <Compile Include="Params\WindowParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Subcategory.cs" />
+    <Compile Include="UIElementComponent\ElementComponent.cs" />
+    <Compile Include="UIElementComponent\ElementGridPropertyComponent.cs" />
+    <Compile Include="UIElementComponent\ElementPropertyComponent.cs" />
+    <Compile Include="UIElementComponent\GridElementComponent.cs" />
+    <Compile Include="UIElementComponent\ImportElementComponent.cs" />
+    <Compile Include="UIElementComponent\RhinoViewElementComponent.cs" />
+    <Compile Include="UIElementComponent\SliderElementComponent.cs" />
+    <Compile Include="WindowComponent\WindowPropElementComponent.cs" />
+    <Compile Include="WindowComponent\WindowUIComponent.cs" />
+    <Compile Include="WPF\MaterialDesignWindow.xaml.cs">
+      <DependentUpon>MaterialDesignWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\UserControlHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UIElementParameter_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WPF\MaterialDesignWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WindowParameter_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WindowComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RhinoViewElementComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GridElementComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ElementPropertyComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ElementGridPropertyComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WindowAddElementComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewComponent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SliderElementComponent_24-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -80,8 +150,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\教学专用\AppData\Roaming\Grasshopper\Libraries\ShowcaseTools\$(ProjectName).dll"
-Copy "$(TargetPath)" "C:\Users\Administrator\AppData\Roaming\Grasshopper\Libraries\ShowcaseTools\$(ProjectName).dll"</PostBuildEvent>
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\教学专用\AppData\Roaming\Grasshopper\Libraries\$(ProjectName).gha"
+Copy "$(TargetPath)" "C:\Users\Administrator\AppData\Roaming\Grasshopper\Libraries\$(ProjectName).gha"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <FallbackCulture>en-US</FallbackCulture>

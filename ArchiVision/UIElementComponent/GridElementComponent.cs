@@ -41,7 +41,7 @@ namespace ArchiVision.UIElementComponent
         /// </summary>
         public GridElementComponent()
           : base("Grid Element", "Grid",
-              "Grid Element", nameof(Subcategory.UI_Container))
+              "Grid Element", Subcategory.UI_Container)
         {
         }
 

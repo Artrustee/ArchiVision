@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchiVisionInfo.cs" />
+    <Compile Include="BaseComponent.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Params\UIElementGoo.cs" />
     <Compile Include="Params\UIElementParameter.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="UIElementComponent\GridElementComponent.cs" />
     <Compile Include="UIElementComponent\ImportElementComponent.cs" />
     <Compile Include="UIElementComponent\RhinoViewElementComponent.cs" />
+    <Compile Include="UIElementComponent\RhinoViewPropertyComponent.cs" />
     <Compile Include="UIElementComponent\SliderElementComponent.cs" />
     <Compile Include="WindowComponent\WindowPropElementComponent.cs" />
     <Compile Include="WindowComponent\WindowUIComponent.cs" />
@@ -140,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SliderElementComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RhinoViewPropertyElementComponent_24-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

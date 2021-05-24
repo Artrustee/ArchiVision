@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace ArchiVision.UIElementComponent
+namespace ArchiVision
 {
     public class ImportElementAttributes<T> : GH_ComponentAttributes where T: IGH_DocumentObject
     {
@@ -125,8 +125,7 @@ namespace ArchiVision.UIElementComponent
         /// Initializes a new instance of the ImportElementComponent class.
         /// </summary>
         public ImportElementComponent(string name, string nickname, string description)
-          : base(name, nickname,
-              description, nameof(Subcategory.UI_Element))
+          : base(name, nickname, description, Subcategory.UI_Element)
         {
         }
 

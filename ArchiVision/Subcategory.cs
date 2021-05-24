@@ -15,7 +15,7 @@ namespace ArchiVision
 {
     public enum Subcategory
     {
-        View,
+        Display,
         UI_Element,
         UI_Container,
         UI_Window,

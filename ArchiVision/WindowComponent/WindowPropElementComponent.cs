@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace ArchiVision.WindowComponent
 {
-    public class WindowPropElementComponent : GH_Component
+    public class WindowPropElementComponent : BaseComponent
     {
         #region Values
         #region Basic Component info
@@ -41,8 +41,7 @@ namespace ArchiVision.WindowComponent
         /// </summary>
         public WindowPropElementComponent()
           : base("Window Property", "Wind Prop",
-              "Window Property",
-              "ArchiVision", nameof(Subcategory.UI_Window))
+              "Window Property",Subcategory.UI_Window)
         {
         }
 

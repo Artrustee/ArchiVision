@@ -103,6 +103,16 @@ namespace ArchiVision.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RhinoViewPropertyElementComponent_24_24 {
+            get {
+                object obj = ResourceManager.GetObject("RhinoViewPropertyElementComponent_24_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SliderElementComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("SliderElementComponent_24_24", resourceCulture);

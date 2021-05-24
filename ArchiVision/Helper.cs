@@ -52,5 +52,17 @@ namespace ArchiVision
             else if (parent is Panel)
                 (parent as Panel).Children.Remove(ele);
         }
+
+        public static MaterialDesignWindow FindWindow(DependencyObject ele)
+        {
+            DependencyObject depend = ele;
+            while (ele != null)
+            {
+                depend = ele;
+                ele = VisualTreeHelper.GetParent(ele);
+            }
+            if (!(depend is MaterialDesignWindow)) throw new Exception("Window is not " + nameof(MaterialDesignWindow));
+            return (MaterialDesignWindow)depend;
+        }
     }
 }

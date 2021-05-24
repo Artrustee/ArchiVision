@@ -15,7 +15,7 @@ using System.Windows.Controls;
 
 namespace ArchiVision
 {
-    public class WindowUIComponent : GH_Component
+    public class WindowUIComponent : BaseComponent
     {
         #region Values
         public MaterialDesignWindow MDWindow { get;protected set; } = new MaterialDesignWindow();
@@ -41,9 +41,7 @@ namespace ArchiVision
         /// Initializes a new instance of the WindowComponent class.
         /// </summary>
         public WindowUIComponent()
-          : base("Window", "Win",
-              "Window",
-              "ArchiVision", nameof(Subcategory.UI_Window))
+          : base("Window", "Win","Window",Subcategory.UI_Window)
         {
         }
 

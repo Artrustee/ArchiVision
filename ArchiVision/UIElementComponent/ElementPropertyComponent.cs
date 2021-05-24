@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ArchiVision.UIElementComponent
 {
@@ -42,7 +43,7 @@ namespace ArchiVision.UIElementComponent
         /// </summary>
         public ElementPropertyComponent()
           : base("Set Element Property", "Ele Prop",
-              "Set Element Property", nameof(Subcategory.UI_Element))
+              "Set Element Property", Subcategory.UI_Element)
         {
         }
 
@@ -80,9 +81,12 @@ namespace ArchiVision.UIElementComponent
             pManager.AddNumberParameter("Margin", "M", "Margin with four numbers(left, top ,right, bottom), or one.", GH_ParamAccess.list);
             pManager[6].Optional = true;
 
-            pManager.AddIntegerParameter(nameof(ShadowDepth), "SD", nameof(ShadowDepth), GH_ParamAccess.item);
+            pManager.AddNumberParameter("Padding", "P", "Padding with four numbers(left, top ,right, bottom), or one.", GH_ParamAccess.list);
             pManager[7].Optional = true;
-            Param_Integer param3 = (Param_Integer)pManager[7];
+
+            pManager.AddIntegerParameter(nameof(ShadowDepth), "SD", nameof(ShadowDepth), GH_ParamAccess.item);
+            pManager[8].Optional = true;
+            Param_Integer param3 = (Param_Integer)pManager[8];
             param3.AddNamedValue(nameof(ShadowDepth.Depth0), (int)ShadowDepth.Depth0);
             param3.AddNamedValue(nameof(ShadowDepth.Depth1), (int)ShadowDepth.Depth1);
             param3.AddNamedValue(nameof(ShadowDepth.Depth2), (int)ShadowDepth.Depth2);
@@ -124,7 +128,20 @@ namespace ArchiVision.UIElementComponent
                     frameEle.Margin = new Thickness(values[0], values[1], values[2 % values.Count], values[3 % values.Count]);
                 }
 
-            if (DA.GetData(7, ref inte)) ShadowAssist.SetShadowDepth(frameEle, (ShadowDepth)inte);
+            if (DA.GetDataList(7, values) && frameEle is Control)
+            {
+                if (values.Count == 1)
+                {
+                    ((Control)frameEle).Padding = new Thickness(values[0]);
+                }
+                else if (values.Count > 1)
+                {
+                    ((Control)frameEle).Padding = new Thickness(values[0], values[1], values[2 % values.Count], values[3 % values.Count]);
+                }
+            }
+
+
+            if (DA.GetData(8, ref inte)) ShadowAssist.SetShadowDepth(frameEle, (ShadowDepth)inte);
 
             DA.SetData(0, element);
         }

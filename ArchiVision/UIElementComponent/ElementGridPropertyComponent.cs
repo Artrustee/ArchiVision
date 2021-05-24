@@ -40,8 +40,8 @@ namespace ArchiVision.UIElementComponent
         /// Initializes a new instance of the ElementGridPropertyComponent class.
         /// </summary>
         public ElementGridPropertyComponent()
-          : base("ElementGridPropertyComponent", "Nickname",
-              "Description", nameof(Subcategory.UI_Container))
+          : base("Element Grid Property", "Grid Prop",
+              "Element Grid Property", Subcategory.UI_Container)
         {
         }
 

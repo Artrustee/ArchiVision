@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace ArchiVision
 {
-    public abstract class ElementComponent: GH_Component 
+    public abstract class ElementComponent: BaseComponent
     {
         #region Values
 
@@ -35,9 +35,10 @@ namespace ArchiVision
         /// <summary>
         /// Initializes a new instance of the ElementComponent class.
         /// </summary>
-        public ElementComponent(string name, string nickName, string description, string subCate)
-          : base(name, nickName, description, "ArchiVision", subCate)
+        public ElementComponent(string name, string nickName, string description, Subcategory subcategory)
+          : base(name, nickName, description, subcategory)
         {
+            this.Hidden = true;
         }
 
         #region Calculate

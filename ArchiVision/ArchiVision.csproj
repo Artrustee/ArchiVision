@@ -76,7 +76,10 @@
     <Compile Include="ArchiVisionInfo.cs" />
     <Compile Include="BaseComponent.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Params\RenderItem.cs" />
+    <Compile Include="Params\CurveRenderItem.cs" />
+    <Compile Include="Params\GeometryRenderItem.cs" />
+    <Compile Include="Params\BaseRenderItem.cs" />
+    <Compile Include="Params\PointRenderItem.cs" />
     <Compile Include="Params\RenderItemGoo.cs" />
     <Compile Include="Params\RenderItemParameter.cs" />
     <Compile Include="Params\UIElementGoo.cs" />
@@ -90,7 +93,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RhinoViewComponent\ArchiVisionConduit.cs" />
-    <Compile Include="RhinoViewComponent\ConstructRenderItem.cs" />
+    <Compile Include="RhinoViewComponent\BaseRenderItemComponent.cs" />
+    <Compile Include="RhinoViewComponent\ShaderRenderItemComponent.cs" />
+    <Compile Include="RhinoViewComponent\CurveRenderItemComponent.cs" />
+    <Compile Include="RhinoViewComponent\PointRenderItemComponent.cs" />
     <Compile Include="Subcategory.cs" />
     <Compile Include="UIElementComponent\ElementComponent.cs" />
     <Compile Include="UIElementComponent\ElementGridPropertyComponent.cs" />
@@ -157,6 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RhinoViewRenderComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurveRenderItemComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PointRenderItemComponent_24-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

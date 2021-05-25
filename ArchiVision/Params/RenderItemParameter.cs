@@ -14,7 +14,7 @@ using System.Drawing;
 
 namespace ArchiVision
 {
-    public class RenderItemParameter : GH_Param<RenderItemGoo>, IGH_PreviewObject
+    public class RenderItemParameter<T> : GH_Param<RenderItemGoo>, IGH_PreviewObject where T:IGH_PreviewData
     {
         #region Values
         #region Basic Component info

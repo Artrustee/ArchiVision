@@ -5,6 +5,7 @@
     See file LICENSE for detail or copy at http://opensource.org/licenses/MIT
 */
 
+using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class RenderItemGoo : GH_Goo<RenderItem>
-    {
+    public class RenderItemGoo : GH_Goo<BaseRenderItem>
+    { 
         public override bool IsValid => Value != null;
 
         public override string TypeName => "Render Item";
@@ -26,7 +27,7 @@ namespace ArchiVision
         {
         }
 
-        public RenderItemGoo(RenderItem element)
+        public RenderItemGoo(BaseRenderItem element)
             : base(element)
         {
         }
@@ -47,7 +48,7 @@ namespace ArchiVision
 
         public override bool CastFrom(object source)
         {
-            RenderItem element = source as RenderItem;
+            BaseRenderItem element = source as BaseRenderItem;
             if (element != null)
             {
                 Value = element;
@@ -58,7 +59,7 @@ namespace ArchiVision
 
         public override bool CastTo<TQ>(ref TQ target)
         {
-            if (typeof(RenderItem).IsAssignableFrom(typeof(TQ)))
+            if (typeof(BaseRenderItem).IsAssignableFrom(typeof(TQ)))
             {
                 target = (TQ)(object)Value;
                 return true;

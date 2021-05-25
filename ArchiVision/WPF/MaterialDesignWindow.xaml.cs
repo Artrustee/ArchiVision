@@ -91,7 +91,7 @@ namespace ArchiVision
             System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 
             saveFileDialog.Title = "Save Picture";
-            saveFileDialog.Filter = "*.JPG|*.JPG|.BMP|*.BMP";
+            saveFileDialog.Filter = "JPG|*.JPG|BMP|*.BMP|PNG|*.PNG";
             saveFileDialog.FileName = "Picture";
             saveFileDialog.SupportMultiDottedExtensions = false;
             saveFileDialog.RestoreDirectory = true;
@@ -110,7 +110,8 @@ namespace ArchiVision
             FindElement(new List<UIElement>() { this }, (host, view, i) =>
             {
                 System.Windows.Point point = host.TransformToAncestor(Window.GetWindow(host)).Transform(new System.Windows.Point(0, 0));
-                Bitmap bit = CaptureControl((ViewportControl)host.Child);
+                ViewportControl ctrl = (ViewportControl)host.Child;
+                Bitmap bit = CaptureControl(ctrl);
                 g.DrawImage(bit, new System.Drawing.Point((int)point.X, (int)point.Y));
             });
 

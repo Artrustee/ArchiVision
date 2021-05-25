@@ -16,7 +16,7 @@ using System.Drawing;
 
 namespace ArchiVision.RhinoViewComponent
 {
-    public class ConstructRenderItem : BaseComponent
+    public class ShaderRenderItemComponent : BaseRenderItemComponent
     {
         #region Values
         #region Basic Component info
@@ -40,9 +40,8 @@ namespace ArchiVision.RhinoViewComponent
         /// <summary>
         /// Initializes a new instance of the ConstructRenderItem class.
         /// </summary>
-        public ConstructRenderItem()
-          : base("ConstructRenderItem", "Nickname",
-              "Description",  Subcategory.UI_RhinoView)
+        public ShaderRenderItemComponent()
+          : base("Shader Render Item", "C Ri", "Shader Render Item")
         {
 
         }
@@ -55,19 +54,10 @@ namespace ArchiVision.RhinoViewComponent
         {
             pManager.AddGeometryParameter("Geometry", "G", "Geometry to preview", GH_ParamAccess.item);
             pManager.HideParameter(0);
-            Param_OGLShader param_OGLShader = new Param_OGLShader();
-            param_OGLShader.SetPersistentData(new GH_Material(Color.White));
-            pManager.AddParameter(param_OGLShader, "Material", "M", "The material override", GH_ParamAccess.item);
-
+            AddShaderParam(pManager);
+            pManager.AddBooleanParameter("Shader", "S", "Shader", GH_ParamAccess.item, true);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
-        {
-            pManager.AddParameter(new RenderItemParameter());
-        }
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -75,17 +65,16 @@ namespace ArchiVision.RhinoViewComponent
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            IGH_GeometricGoo destination = null;
-            GH_Material destination2 = null;
-            if (DA.GetData(0, ref destination) && DA.GetData(1, ref destination2) && destination.IsValid)
+            IGH_PreviewData geo = null;
+            GH_Material mate = null;
+            bool useShade = true;
+
+            if (DA.GetData(0, ref geo) && DA.GetData(1, ref mate) && mate.IsValid)
             {
-                if (!(destination is IGH_PreviewData))
+                DA.GetData(2, ref useShade);
+                if (mate.Value != null)
                 {
-                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, destination.TypeName + " does not support previews");
-                }
-                else if (destination2.Value != null)
-                {
-                    DA.SetData(0, new RenderItem((IGH_PreviewData)destination, destination2));
+                    DA.SetData(0, new GeometryRenderItem(geo, mate, useShade));
                 }
             }
         }

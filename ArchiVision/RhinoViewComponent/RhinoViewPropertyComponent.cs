@@ -32,7 +32,7 @@ namespace ArchiVision
         private BoundingBox _boundingBox;
         public override BoundingBox ClippingBox => _boundingBox;
 
-        public Dictionary<string, List<RenderItem>> PreviewObjects { get; } = new Dictionary<string, List<RenderItem>>();
+        public Dictionary<string, List<BaseRenderItem>> PreviewObjects { get; } = new Dictionary<string, List<BaseRenderItem>>();
 
         #region Basic Component info
 
@@ -68,7 +68,7 @@ namespace ArchiVision
             pManager.AddParameter(new UIElementParameter());
             pManager.AddParameter(Helper.CreateViewParam());
             pManager[1].Optional = true;
-            pManager.AddParameter(new RenderItemParameter(GH_ParamAccess.tree));
+            pManager.AddParameter(new RenderItemParameter<IGH_PreviewData>(GH_ParamAccess.tree));
             pManager[2].Optional = true;
         }
 
@@ -114,11 +114,12 @@ namespace ArchiVision
                         BoundingBox box = BoundingBox.Empty;
 
                         #region Get Preview Items.
-                        List<RenderItem> preItems = new List<RenderItem>();
+                        List<BaseRenderItem> preItems = new List<BaseRenderItem>();
                         geos.Branches[i].ForEach((goo) =>
                         {
+                            if (goo == null) return;
                             preItems.Add(goo.Value);
-                            BoundingBox relay = ((IGH_GeometricGoo)goo.Value.Geometry).Boundingbox;
+                            BoundingBox relay = goo.Value.Geometry.ClippingBox;
                             box.Union(relay);
                             _boundingBox.Union(relay);
                         });
@@ -146,19 +147,19 @@ namespace ArchiVision
 
         public override void DrawViewportWires(IGH_PreviewArgs args)
         {
-            List<RenderItem> _items = FindItems(args);
+            List<BaseRenderItem> _items = FindItems(args);
             if (_items == null) return;
             _items.ForEach((item) => item.DrawViewportWires(args, base.Attributes.Selected));
         }
 
         public override void DrawViewportMeshes(IGH_PreviewArgs args)
         {
-            List<RenderItem> _items = FindItems(args);
+            List<BaseRenderItem> _items = FindItems(args);
             if (_items == null) return;
             _items.ForEach((item) => item.DrawViewportMeshes(args, base.Attributes.Selected));
         }
 
-        private List<RenderItem> FindItems(IGH_PreviewArgs args)
+        private List<BaseRenderItem> FindItems(IGH_PreviewArgs args)
         {
             if (PreviewObjects == null || args.Document.IsRenderMeshPipelineViewport(args.Display) || string.IsNullOrEmpty(args.Viewport.Name))
             {
@@ -169,31 +170,31 @@ namespace ArchiVision
             return PreviewObjects[args.Viewport.Name];
         }
 
-        public override void AppendRenderGeometry(GH_RenderArgs args)
-        {
-            GH_Document gH_Document = OnPingDocument();
-            if (gH_Document != null && (gH_Document.PreviewMode == GH_PreviewMode.Disabled || gH_Document.PreviewMode == GH_PreviewMode.Wireframe))
-            {
-                return;
-            }
+        //public override void AppendRenderGeometry(GH_RenderArgs args)
+        //{
+        //    GH_Document gH_Document = OnPingDocument();
+        //    if (gH_Document != null && (gH_Document.PreviewMode == GH_PreviewMode.Disabled || gH_Document.PreviewMode == GH_PreviewMode.Wireframe))
+        //    {
+        //        return;
+        //    }
 
-            List<RenderItem> items = new List<RenderItem>();
-            foreach (var item in PreviewObjects.Values)
-            {
-                if (item == null) continue;
-                items.AddRange(item);
-            }
+        //    List<RenderItem> items = new List<RenderItem>();
+        //    foreach (var item in PreviewObjects.Values)
+        //    {
+        //        if (item == null) continue;
+        //        items.AddRange(item);
+        //    }
 
-            items = new List<RenderItem>(items);
-            if (items.Count == 0)
-            {
-                return;
-            }
-            foreach (RenderItem item in items)
-            {
-                item.PushToRenderPipeline(args);
-            }
-        }
+        //    items = new List<RenderItem>(items);
+        //    if (items.Count == 0)
+        //    {
+        //        return;
+        //    }
+        //    foreach (RenderItem item in items)
+        //    {
+        //        item.PushToRenderPipeline(args);
+        //    }
+        //}
 
         #endregion
     }

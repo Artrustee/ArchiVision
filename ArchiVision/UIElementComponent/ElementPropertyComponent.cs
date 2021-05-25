@@ -75,8 +75,7 @@ namespace ArchiVision.UIElementComponent
             param2.AddNamedValue(nameof(VerticalAlignment.Bottom), (int)VerticalAlignment.Bottom);
             param2.AddNamedValue(nameof(VerticalAlignment.Stretch), (int)VerticalAlignment.Stretch);
 
-            pManager.AddGenericParameter("-----", "---", "-----", GH_ParamAccess.tree);
-            pManager[5].Optional = true;
+            AddSection(pManager);
 
             pManager.AddNumberParameter("Margin", "M", "Margin with four numbers(left, top ,right, bottom), or one.", GH_ParamAccess.list);
             pManager[6].Optional = true;

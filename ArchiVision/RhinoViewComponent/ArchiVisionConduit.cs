@@ -10,14 +10,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino.Display;
 
 namespace ArchiVision
 {
-    public enum Subcategory
+    public class ArchiVisionConduit : DisplayConduit
     {
-        UI_RhinoView,
-        UI_Element,
-        UI_Container,
-        UI_Window,
+        protected override void PostDrawObjects(DrawEventArgs e)
+        {
+            base.PostDrawObjects(e);
+        }
     }
 }

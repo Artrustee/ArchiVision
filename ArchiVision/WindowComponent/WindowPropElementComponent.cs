@@ -54,8 +54,7 @@ namespace ArchiVision.WindowComponent
             pManager.AddParameter(new WindowParameter());
             pManager.AddParameter(new UIElementParameter());
 
-            pManager.AddGenericParameter("------", "---", "------", GH_ParamAccess.tree);
-            pManager[2].Optional = true;
+            AddSection(pManager);
 
             pManager.AddColourParameter("PrimaryHueLightBrush", "PL", "PrimaryHueLightBrush", GH_ParamAccess.item);
             pManager[3].Optional = true;
@@ -75,8 +74,7 @@ namespace ArchiVision.WindowComponent
             pManager.AddColourParameter("PrimaryHueDarkForegroundBrush", "PDF", "PrimaryHueDarkForegroundBrush", GH_ParamAccess.item);
             pManager[8].Optional = true;
 
-            pManager.AddGenericParameter("------", "---", "------", GH_ParamAccess.tree);
-            pManager[9].Optional = true;
+            AddSection(pManager);
 
             pManager.AddColourParameter("SecondaryHueMidBrush", "SM", "SecondaryHueMidBrush", GH_ParamAccess.item);
             pManager[10].Optional = true;

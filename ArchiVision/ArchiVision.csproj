@@ -52,6 +52,7 @@
     <Reference Include="MaterialDesignThemes.Wpf">
       <HintPath>..\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RhinoCommon">
@@ -75,6 +76,9 @@
     <Compile Include="ArchiVisionInfo.cs" />
     <Compile Include="BaseComponent.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Params\RenderItem.cs" />
+    <Compile Include="Params\RenderItemGoo.cs" />
+    <Compile Include="Params\RenderItemParameter.cs" />
     <Compile Include="Params\UIElementGoo.cs" />
     <Compile Include="Params\UIElementParameter.cs" />
     <Compile Include="Params\WindowGoo.cs" />
@@ -85,14 +89,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RhinoViewComponent\ArchiVisionConduit.cs" />
+    <Compile Include="RhinoViewComponent\ConstructRenderItem.cs" />
     <Compile Include="Subcategory.cs" />
     <Compile Include="UIElementComponent\ElementComponent.cs" />
     <Compile Include="UIElementComponent\ElementGridPropertyComponent.cs" />
     <Compile Include="UIElementComponent\ElementPropertyComponent.cs" />
     <Compile Include="UIElementComponent\GridElementComponent.cs" />
     <Compile Include="UIElementComponent\ImportElementComponent.cs" />
-    <Compile Include="UIElementComponent\RhinoViewElementComponent.cs" />
-    <Compile Include="UIElementComponent\RhinoViewPropertyComponent.cs" />
+    <Compile Include="RhinoViewComponent\RhinoViewElementComponent.cs" />
+    <Compile Include="RhinoViewComponent\RhinoViewPropertyComponent.cs" />
     <Compile Include="UIElementComponent\SliderElementComponent.cs" />
     <Compile Include="WindowComponent\WindowPropElementComponent.cs" />
     <Compile Include="WindowComponent\WindowUIComponent.cs" />
@@ -138,13 +144,19 @@
     <None Include="Resources\WindowAddElementComponent_24-24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewComponent\" />
+    <None Include="Resources\RenderItemParameter_24-24.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SliderElementComponent_24-24.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RhinoViewPropertyElementComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConstructRenderItemComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RhinoViewRenderComponent_24-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

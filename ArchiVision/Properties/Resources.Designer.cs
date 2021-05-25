@@ -63,6 +63,16 @@ namespace ArchiVision.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ConstructRenderItemComponent_24_24 {
+            get {
+                object obj = ResourceManager.GetObject("ConstructRenderItemComponent_24_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ElementGridPropertyComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("ElementGridPropertyComponent_24_24", resourceCulture);
@@ -93,6 +103,16 @@ namespace ArchiVision.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RenderItemParameter_24_24 {
+            get {
+                object obj = ResourceManager.GetObject("RenderItemParameter_24_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RhinoViewElementComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("RhinoViewElementComponent_24_24", resourceCulture);
@@ -106,6 +126,16 @@ namespace ArchiVision.Properties {
         internal static System.Drawing.Bitmap RhinoViewPropertyElementComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("RhinoViewPropertyElementComponent_24_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RhinoViewRenderComponent_24_24 {
+            get {
+                object obj = ResourceManager.GetObject("RhinoViewRenderComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

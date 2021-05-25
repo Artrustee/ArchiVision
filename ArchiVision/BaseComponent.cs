@@ -6,6 +6,7 @@
 */
 
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Parameters;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,13 @@ namespace ArchiVision
         public BaseComponent(string name, string nickname, string description, Subcategory subcategory)
           : base(name, nickname, description, "ArchiVision", subcategory.ToString())
         {
+        }
+
+        protected void AddSection(GH_Component.GH_InputParamManager pManager)
+        {
+            Param_GenericObject obj = new Param_GenericObject();
+            obj.Optional = true;
+            pManager.AddParameter(obj, "------", "---", "------", GH_ParamAccess.tree);
         }
     }
 }

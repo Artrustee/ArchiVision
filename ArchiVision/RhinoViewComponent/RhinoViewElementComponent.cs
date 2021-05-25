@@ -23,40 +23,9 @@ namespace ArchiVision
     public class RhinoViewElementComponent : ElementComponent
     {
         #region Values
-        public bool ShowAxes { get; private set; }
-        public DisplayModeDescription DisplayDesc
-        {
-            get
-            {
-                string name = "ArchiVision Display";
-                var display = DisplayModeDescription.FindByName(name);
-                if (display == null)
-                {
-                    display = DisplayModeDescription.GetDisplayMode(DisplayModeDescription.CopyDisplayMode(DisplayModeDescription.WireframeId, name));
-                    display.DisplayAttributes.ShowAnnotations = false;
-                    display.DisplayAttributes.ShowClippingPlanes = false;
-                    display.DisplayAttributes.ShowCurves = false;
-                    display.DisplayAttributes.ShowGrips = false;
-                    display.DisplayAttributes.ShowIsoCurves = false;
-                    display.DisplayAttributes.ShowLights = false;
-                    display.DisplayAttributes.ShowPointClouds = false;
-                    display.DisplayAttributes.ShowPoints = false;
-                    display.DisplayAttributes.ShowRealtimeRenderProgressBar = false;
-                    display.DisplayAttributes.ShowSurfaceEdges = false;
-                    display.DisplayAttributes.ShowTangentEdges = false;
-                    display.DisplayAttributes.ShowTangentSeams = false;
-                    display.DisplayAttributes.ShowText = false;
-                    display.DisplayAttributes.ViewSpecificAttributes.DrawWorldAxes = ShowAxes;
-
-                    DisplayModeDescription.UpdateDisplayMode(display);
-
-                }
-                return display;
-            }
-        }
         #region Basic Component info
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -77,7 +46,7 @@ namespace ArchiVision
         /// </summary>
         public RhinoViewElementComponent()
           : base("RhinoView Element", "RV Ele",
-              "RhinoView Element", Subcategory.UI_Element)
+              "RhinoView Element", Subcategory.UI_RhinoView)
         {
         }
 
@@ -93,7 +62,8 @@ namespace ArchiVision
             pManager.AddNumberParameter("Border Outside Thickness Addition", "BOT", "Border Outside Thickness Addition", GH_ParamAccess.item, 0);
             pManager.AddColourParameter("Border Color", "BC", "Border Color", GH_ParamAccess.item);
             pManager[4].Optional = true;
-            pManager.AddBooleanParameter("Show World Axes", "SA", "Show World Axes", GH_ParamAccess.item, true);
+            pManager.AddTextParameter("Display Mode Name", "DM", "Display Mode Name", GH_ParamAccess.item);
+            pManager[5].Optional = true;
 
         }
 
@@ -108,27 +78,35 @@ namespace ArchiVision
             double thickness = 0;
             double outThickness = 0;
             Color color = Color.Black;
-            bool showWorldAxes = true;
-
+            string displayMode = "";
+            DisplayModeDescription mode = DisplayModeDescription.GetDisplayMode(DisplayModeDescription.WireframeId);
 
             DA.GetData(0, ref column);
             DA.GetData(1, ref count);
             DA.GetData(2, ref thickness);
             DA.GetData(3, ref outThickness);
-            DA.GetData(5, ref showWorldAxes);
 
-            ShowAxes = showWorldAxes;
-            thickness = Math.Max(thickness, 0);
-            outThickness = Math.Max(outThickness, 0);
 
             if (column < 1 || count < 1) this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Count must larger than 1!");
 
+            thickness = Math.Max(thickness, 0);
+            outThickness = Math.Max(outThickness, 0);
+
             UniformGrid grid = new UniformGrid() { Columns = column,};
+            if (DA.GetData(5, ref displayMode))
+            {
+                mode = DisplayModeDescription.FindByName(displayMode);
+                if(mode == null)
+                {
+                    this.AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Can't find display mode called {displayMode}!");
+                    mode = DisplayModeDescription.GetDisplayMode(DisplayModeDescription.WireframeId);
+                }
+            }
 
             for (int i = 0; i < count; i++)
             {
                 ViewportControl vpControl = new ViewportControl();
-                vpControl.Viewport.DisplayMode = this.DisplayDesc;
+                vpControl.Viewport.DisplayMode = mode;
 
                 grid.Children.Add(new WindowsFormsHost()
                 {
@@ -136,7 +114,11 @@ namespace ArchiVision
                     Margin = new Thickness(thickness/2),
                 });
             }
-            Border border = new Border() { Child = grid , Padding = new Thickness(outThickness + thickness/2) };
+            Border border = new Border() 
+            { 
+                Child = grid, 
+                Padding = new Thickness(outThickness + thickness/2),
+            };
             if (DA.GetData(4, ref color)) border.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
 
             DA.SetData(0, border);
@@ -144,11 +126,4 @@ namespace ArchiVision
         #endregion
     }
 
-    //class test : Rhino.Display.DisplayConduit
-    //{
-    //    protected override void PostDrawObjects(DrawEventArgs e)
-    //    {
-    //        base.PostDrawObjects(e);
-    //    }
-    //}
 }

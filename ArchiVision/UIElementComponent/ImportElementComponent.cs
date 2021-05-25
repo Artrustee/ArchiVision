@@ -127,6 +127,7 @@ namespace ArchiVision
         public ImportElementComponent(string name, string nickname, string description)
           : base(name, nickname, description, Subcategory.UI_Element)
         {
+
         }
 
         #region Calculate

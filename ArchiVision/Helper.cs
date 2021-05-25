@@ -6,6 +6,8 @@
 */
 
 using Grasshopper.Kernel;
+using Rhino.Display;
+using RhinoWindows.Forms.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Forms.Integration;
 using System.Windows.Media;
 
 namespace ArchiVision
@@ -63,6 +67,32 @@ namespace ArchiVision
             }
             if (!(depend is MaterialDesignWindow)) throw new Exception("Window is not " + nameof(MaterialDesignWindow));
             return (MaterialDesignWindow)depend;
+        }
+
+        public static bool IsViewport(UIElement element, Action<WindowsFormsHost, RhinoViewport, int> viewportAction, bool refresh)
+        {
+            if (element == null) return false;
+            if (!(element is Border)) return false;
+            Border border = element as Border;
+            if (!(border.Child is UniformGrid)) return false;
+            UniformGrid grid = border.Child as UniformGrid;
+
+            for (int i = 0; i < grid.Children.Count; i++)
+            {
+                var item = grid.Children[i];
+
+                if (!(item is WindowsFormsHost)) continue;
+                WindowsFormsHost host = item as WindowsFormsHost;
+                if (host == null) continue;
+                if (!(host.Child is ViewportControl)) continue;
+                ViewportControl control = (ViewportControl)host.Child;
+                RhinoViewport viewport = control.Viewport;
+
+                viewportAction.Invoke(host, viewport, i);
+
+                if(refresh)((ViewportControl)host.Child).Refresh();
+            }
+            return true;
         }
     }
 }

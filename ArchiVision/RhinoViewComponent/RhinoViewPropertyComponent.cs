@@ -137,32 +137,11 @@ namespace ArchiVision
 
         }
 
-        protected void DoToViewport(UIElement element, Action<RhinoViewport, int> viewportAction)
+        public void DoToViewport(UIElement element, Action<RhinoViewport, int> viewportAction)
         {
-            Action wrong = () =>
-            {
+            if(!Helper.IsViewport(element, (host, view, inte) => viewportAction.Invoke(view, inte), true))
                 this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input Element must be from RhinoView Element Component!");
-            };
-            if (element == null) wrong();
-            if (!(element is Border)) wrong();
-            Border border = element as Border;
-            if (!(border.Child is UniformGrid)) wrong();
-            UniformGrid grid = border.Child as UniformGrid;
 
-            for (int i = 0; i < grid.Children.Count; i++)
-            {
-                var item = grid.Children[i];
-
-                if (!(item is WindowsFormsHost)) wrong();
-                WindowsFormsHost host = item as WindowsFormsHost;
-                if (host == null) wrong();
-                if (!(host.Child is ViewportControl)) wrong();
-                RhinoViewport viewport = ((ViewportControl)host.Child).Viewport;
-
-                viewportAction.Invoke(viewport, i);
-
-                ((ViewportControl)host.Child).Refresh();
-            }
         }
 
         public override void DrawViewportWires(IGH_PreviewArgs args)

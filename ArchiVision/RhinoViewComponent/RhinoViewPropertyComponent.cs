@@ -32,6 +32,8 @@ namespace ArchiVision
         private BoundingBox _boundingBox;
         public override BoundingBox ClippingBox => _boundingBox;
 
+        private ArchiVisionConduitForView _conduit;
+
         public Dictionary<string, List<BaseRenderItem>> PreviewObjects { get; } = new Dictionary<string, List<BaseRenderItem>>();
 
         #region Basic Component info
@@ -57,6 +59,7 @@ namespace ArchiVision
               "RhinoView Property", Subcategory.UI_RhinoView)
         {
             this.Hidden = false;
+            _conduit = new ArchiVisionConduitForView(this) { Enabled = true };
         }
 
         #region Calculate
@@ -147,27 +150,29 @@ namespace ArchiVision
 
         public override void DrawViewportWires(IGH_PreviewArgs args)
         {
-            List<BaseRenderItem> _items = FindItems(args);
+            List<BaseRenderItem> _items = FindItems(args.Viewport);
             if (_items == null) return;
             _items.ForEach((item) => item.DrawViewportWires(args, base.Attributes.Selected));
         }
 
         public override void DrawViewportMeshes(IGH_PreviewArgs args)
         {
-            List<BaseRenderItem> _items = FindItems(args);
+            List<BaseRenderItem> _items = FindItems(args.Viewport);
             if (_items == null) return;
             _items.ForEach((item) => item.DrawViewportMeshes(args, base.Attributes.Selected));
         }
 
-        private List<BaseRenderItem> FindItems(IGH_PreviewArgs args)
+
+
+        public List<BaseRenderItem> FindItems(RhinoViewport viewport)
         {
-            if (PreviewObjects == null || args.Document.IsRenderMeshPipelineViewport(args.Display) || string.IsNullOrEmpty(args.Viewport.Name))
+            if (PreviewObjects == null || string.IsNullOrEmpty(viewport.Name))
             {
                 return null;
             }
-            if (!PreviewObjects.Keys.Contains(args.Viewport.Name)) return null;
+            if (!PreviewObjects.Keys.Contains(viewport.Name)) return null;
 
-            return PreviewObjects[args.Viewport.Name];
+            return PreviewObjects[viewport.Name];
         }
 
         //public override void AppendRenderGeometry(GH_RenderArgs args)
@@ -196,6 +201,33 @@ namespace ArchiVision
         //    }
         //}
 
+        public override void RemovedFromDocument(GH_Document document)
+        {
+            _conduit.Enabled = false;
+            base.RemovedFromDocument(document);
+        }
+
+        public override void DocumentContextChanged(GH_Document document, GH_DocumentContext context)
+        {
+            try
+            {
+                base.DocumentContextChanged(document, context);
+                if (context == GH_DocumentContext.Close || context == GH_DocumentContext.Unloaded)
+                {
+                    _conduit.Enabled = false;
+                }
+                else if ((context == GH_DocumentContext.Open || context == GH_DocumentContext.Loaded) &&
+                    _conduit.Enabled == false && _conduit != null)
+                {
+                    _conduit.Enabled = true;
+                }
+            }
+            catch { }
+        }
+
         #endregion
+
+
     }
+
 }

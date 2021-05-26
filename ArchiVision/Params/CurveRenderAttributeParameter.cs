@@ -13,8 +13,9 @@ using System.Drawing;
 
 namespace ArchiVision
 {
-    public class UIElementParameter : GH_Param<UIElementGoo>
+    public class CurveRenderAttributeParameter : GH_Param<CurveRenderAttributeGoo>
     {
+        #region Values
         #region Basic Component info
 
         public override GH_Exposure Exposure => GH_Exposure.hidden;
@@ -22,26 +23,30 @@ namespace ArchiVision
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override Bitmap Icon => Properties.Resources.UIElementParameter_24_24;
+        protected override Bitmap Icon => Properties.Resources.CurveRenderAttributeParameter_24_24;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("639afc51-e9ae-4e60-b002-9c2ec187c499");
+        public override Guid ComponentGuid => new Guid("99e97220-998e-4f76-8f9f-1ccc1bb0b98e");
 
 
         #endregion
+        #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the CurveRenderAttributeParameter class.
+        /// </summary>
         /// <summary>
         /// Initializes a new instance of the UIElementParameter class.
         /// </summary>
-        public UIElementParameter(string name, string nickname, string description, string category, string subcategory, GH_ParamAccess access)
+        public CurveRenderAttributeParameter(string name, string nickname, string description, string category, string subcategory, GH_ParamAccess access)
                 : base(name, nickname, description, category, subcategory, access)
         {
         }
 
-        public UIElementParameter()
-        : base("UI Element", "E", "UI Element", "ArchiVision", Subcategory.UI_Element.ToString(), GH_ParamAccess.item)
+        public CurveRenderAttributeParameter()
+        : base("Curve Render Attribute", "CA", "Curve Render Attribute", "ArchiVision", Subcategory.UI_Element.ToString(), GH_ParamAccess.item)
         {
         }
     }

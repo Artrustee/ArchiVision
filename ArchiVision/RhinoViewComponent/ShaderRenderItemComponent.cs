@@ -9,6 +9,7 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Components;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
+using Rhino;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
@@ -52,10 +53,23 @@ namespace ArchiVision.RhinoViewComponent
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGeometryParameter("Geometry", "G", "Geometry to preview", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Mesh", "m", "Mesh to preview", GH_ParamAccess.item);
             pManager.HideParameter(0);
             AddShaderParam(pManager);
-            pManager.AddBooleanParameter("Shader", "S", "Shader", GH_ParamAccess.item, true);
+
+            pManager.AddAngleParameter("AngleLimit", "A", "AngleLimit", GH_ParamAccess.item, Math.PI / 6);
+
+            pManager.AddParameter(new CurveRenderAttributeParameter(), "Naked Edge Attribute", "N", "Naked Edge Attribute", GH_ParamAccess.item);
+            pManager[3].Optional = true;
+
+            pManager.AddParameter(new CurveRenderAttributeParameter(), "Interior Edge Attribute", "I", "Interior Edge Attribute", GH_ParamAccess.item);
+            pManager[4].Optional = true;
+
+            pManager.AddParameter(new CurveRenderAttributeParameter(), "Sharp Edge Attribute", "S", "Sharp Edge Attribute. It will take a lot of time!", GH_ParamAccess.item);
+            pManager[5].Optional = true;
+
+            pManager.AddParameter(new CurveRenderAttributeParameter(), "Out Line Attribute", "O", "Out Line Attribute", GH_ParamAccess.item);
+            pManager[6].Optional = true;
         }
 
 
@@ -65,16 +79,28 @@ namespace ArchiVision.RhinoViewComponent
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            IGH_PreviewData geo = null;
+            GH_Mesh mesh = null;
             GH_Material mate = null;
-            bool useShade = true;
 
-            if (DA.GetData(0, ref geo) && DA.GetData(1, ref mate) && mate.IsValid)
+            if (DA.GetData(0, ref mesh) && DA.GetData(1, ref mate) && mate.IsValid)
             {
-                DA.GetData(2, ref useShade);
+                CurveRenderAttribute naked = null;
+                CurveRenderAttribute interior = null;
+                CurveRenderAttribute sharp = null;
+                CurveRenderAttribute outline = null;
+
+                double angle = Math.PI / 6;
+                DA.GetData(2, ref angle);
+                if (((Param_Number)Params.Input[2]).UseDegrees)
+                    angle = RhinoMath.ToRadians(angle);
+                DA.GetData(3, ref naked); 
+                DA.GetData(4, ref interior);
+                DA.GetData(5, ref sharp);
+                DA.GetData(6, ref outline);
+
                 if (mate.Value != null)
                 {
-                    DA.SetData(0, new GeometryRenderItem(geo, mate, useShade));
+                    DA.SetData(0, new MeshRenderItem(mesh, mate, naked, interior, outline, sharp, angle));
                 }
             }
         }

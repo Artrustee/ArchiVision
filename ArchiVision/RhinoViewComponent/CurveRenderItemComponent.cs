@@ -7,6 +7,7 @@
 
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
+using Rhino.DocObjects;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
@@ -50,8 +51,14 @@ namespace ArchiVision
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddCurveParameter("Curve", "C", "Curve", GH_ParamAccess.item);
-            pManager.AddColourParameter("Colour", "c", "Colour", GH_ParamAccess.item, Color.White);
-            pManager.AddIntegerParameter("Thickness", "T", "Thickness", GH_ParamAccess.item, 2);
+            pManager.AddParameter(new CurveRenderAttributeParameter());
+            pManager[1].Optional = true;
+
+            AddSection(pManager);
+
+            pManager.AddBooleanParameter("Start Arrow", "S", "Start Arrow", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("End Arrow", "E", "End Arrow", GH_ParamAccess.item, false);
+            pManager.AddNumberParameter("Arrow Mult", "M", "Arrow Mult, bigger than 1!", GH_ParamAccess.item, 10);
         }
 
         /// <summary>
@@ -61,14 +68,22 @@ namespace ArchiVision
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             GH_Curve curve = null;
-            Color color = Color.Empty;
-            int thick = 0;
+            CurveRenderAttribute att = new CurveRenderAttribute();
+
+            bool start = false;
+            bool end = false;
+            double mult = 10;
 
             DA.GetData(0, ref curve);
-            DA.GetData(1, ref color);
-            DA.GetData(2, ref thick);
+            DA.GetData(1, ref att);
 
-            DA.SetData(0, new CurveRenderItem(curve, color, thick));
+            DA.GetData(3, ref start);
+            DA.GetData(4, ref end);
+            DA.GetData(5, ref mult);
+
+            mult = Math.Max(mult, 1);
+
+            DA.SetData(0, new ArrowCurveRenderItem(curve, att, start ,end, mult));
         }
         #endregion
     }

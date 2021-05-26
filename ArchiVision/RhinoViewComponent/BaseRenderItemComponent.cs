@@ -37,7 +37,6 @@ namespace ArchiVision
         public BaseRenderItemComponent(string name, string nickname, string description)
           : base(name, nickname, description, Subcategory.UI_RhinoView)
         {
-            this.Hidden = true;
         }
 
 
@@ -47,6 +46,7 @@ namespace ArchiVision
         /// </summary>
         protected sealed override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            this.Hidden = true;
             pManager.AddParameter(new RenderItemParameter<IGH_PreviewData>());
         }
 

@@ -121,6 +121,12 @@
   <data name="ConstructRenderItemComponent_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConstructRenderItemComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CurveRenderAttributeParameter_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurveRenderAttributeParameter_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurveRenderItemAttributeComponent_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurveRenderItemAttributeComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CurveRenderItemComponent_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CurveRenderItemComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -144,9 +150,6 @@
   </data>
   <data name="RhinoViewPropertyElementComponent_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RhinoViewPropertyElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RhinoViewRenderComponent_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RhinoViewRenderComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SliderElementComponent_24_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SliderElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

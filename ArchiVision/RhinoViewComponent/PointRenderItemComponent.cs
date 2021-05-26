@@ -74,7 +74,7 @@ namespace ArchiVision
             param.AddNamedValue(nameof(PointStyle.Tag), (int)PointStyle.Tag);
             param.AddNamedValue(nameof(PointStyle.Triangle), (int)PointStyle.Triangle);
             param.AddNamedValue(nameof(PointStyle.X), (int)PointStyle.X);
-
+            pManager.AddBooleanParameter("Absolute", "A", "Absolute", GH_ParamAccess.item, true);
         }
 
         /// <summary>
@@ -87,18 +87,20 @@ namespace ArchiVision
             Color color = Color.Empty;
             double radius = 0;
             int style = 0;
+            bool absolute = true;
 
             DA.GetData(0, ref point);
             DA.GetData(1, ref color);
             DA.GetData(2, ref radius);
             DA.GetData(3, ref style);
+            DA.GetData(4, ref absolute);
 
             radius = Math.Max(radius, 0);
             PointStyle ptStyle = (PointStyle)style;
 
             this.Message = ptStyle.ToString();
 
-            DA.SetData(0, new PointRenderItem(point, color, ptStyle, (float)radius));
+            DA.SetData(0, new PointRenderItem(point, color, ptStyle, (float)radius, absolute));
         }
         #endregion
     }

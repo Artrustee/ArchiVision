@@ -17,21 +17,18 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class PointRenderItem : BaseRenderItem
+    public class PointRenderItem : SizableRenderItem
     {
         public PointStyle PtStyle { get; protected set; }
-        public float Radius { get; protected set; }
 
-        public PointRenderItem(GH_Point point, Color color, PointStyle style, float radius)
-            :base(point, color)
+        public PointRenderItem(GH_Point point, Color color, PointStyle style, float radius, bool absolute)
+            :base(point, radius, absolute, color)
         {
             PtStyle = style;
-            Radius = radius;
         }
-
-        public override void DrawViewportWires(IGH_PreviewArgs args, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
         {
-            args.Display.DrawPoint(((GH_Point)Geometry).Value, PtStyle, Radius, Colour);
+            Display.DrawPoint(((GH_Point)Geometry).Value, PtStyle, (int)GetSize(Viewport), Colour);
         }
     }
 }

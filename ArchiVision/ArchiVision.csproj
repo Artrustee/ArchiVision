@@ -77,10 +77,12 @@
     <Compile Include="BaseComponent.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Params\ArrowCurveRenderItem.cs" />
+    <Compile Include="Params\AttributeRenderItem.cs" />
     <Compile Include="Params\CurveRenderAttributeGoo.cs" />
     <Compile Include="Params\CurveRenderAttributeParameter.cs" />
     <Compile Include="Params\CurveRenderItem.cs" />
     <Compile Include="Params\CurveRenderAttribute.cs" />
+    <Compile Include="Params\MergedMeshRenderItem.cs" />
     <Compile Include="Params\MeshOutlineRenderItem.cs" />
     <Compile Include="Params\MeshRenderItem.cs" />
     <Compile Include="Params\BaseRenderItem.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="RhinoViewComponent\ArchiVisionConduitForView.cs" />
     <Compile Include="RhinoViewComponent\BaseRenderItemComponent.cs" />
     <Compile Include="RhinoViewComponent\CurveRenderItemAttributeComponent.cs" />
+    <Compile Include="RhinoViewComponent\MergedShaderRenderItemComponent.cs" />
     <Compile Include="RhinoViewComponent\ShaderRenderItemComponent.cs" />
     <Compile Include="RhinoViewComponent\CurveRenderItemComponent.cs" />
     <Compile Include="RhinoViewComponent\PointRenderItemComponent.cs" />
@@ -179,6 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CurveRenderItemAttributeComponent_24-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MergedRenderItemComponent_24-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

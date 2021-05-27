@@ -6,6 +6,7 @@
 */
 
 using Grasshopper.Kernel.Types;
+using Rhino;
 using Rhino.Display;
 using Rhino.DocObjects;
 using Rhino.Geometry;
@@ -29,60 +30,74 @@ namespace ArchiVision
             LineType = att.LineType;
         }
 
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override BoundingBox ClippingBox
+        {
+            get
+            {
+                BoundingBox box = ((GH_Mesh)Geometry).Value.Offset(5 * InputSize).GetBoundingBox(false);
+                box.Union(base.ClippingBox);
+                return box;
+            }
+        }
+
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
         {
             PatternCurve.Clear();
             Points.Clear();
 
-            // get the current view corners
-            Point3d[] m_farCorners = Viewport.GetFarRect();
-            Point3d[] m_nearCorners = Viewport.GetNearRect();
-
-            Point3d[] m_viewCorners = new Point3d[3]
+            double thickness = GetSize(Viewport, unitPerPx);
+            double tolerance = RhinoDoc.ActiveDoc?.ModelAbsoluteTolerance ?? 0.001;
+            //double offsetDistance = thickness / unitPerPx / 2;
+            double offsetDistance = 0;
+            ((GH_Mesh)Geometry).Value.GetOutlines(new ViewportInfo(Viewport), drawRect.Plane).ToList().ForEach((polyline) =>
             {
-                (m_farCorners[0] * 0.15 + m_nearCorners[0] * 0.85),
-                (m_farCorners[1] * 0.15 + m_nearCorners[1] * 0.85),
-                (m_farCorners[2] * 0.15 + m_nearCorners[2] * 0.85)
-                };
+                //Polyline poly = CurveExtend(polyline, 5 * (thickness + offsetDistance));
 
-            //e.Viewport.GetNearRect();
+                Curve poly = polyline.ToPolylineCurve();
+                if (!polyline.IsClosed)
+                    poly = poly.Extend(CurveEnd.Both, (thickness + offsetDistance), CurveExtensionStyle.Line);
 
-            Plane m_drawPlane = new Plane(m_viewCorners[0], m_viewCorners[1], m_viewCorners[2]);
-
-            double m_viewWidth = m_viewCorners[0].DistanceTo(m_viewCorners[1]);
-            double m_unitPerPx = m_viewWidth / Viewport.Size.Width;
-            Curve.JoinCurves(((GH_Mesh)Geometry).Value.GetOutlines(new ViewportInfo(Viewport), m_drawPlane).Select((polyline) => polyline.ToNurbsCurve())).ToList().ForEach((polyline) =>
-            {
-                Curve curve = polyline.ToNurbsCurve();
-                Curve crv = curve.Extend(CurveEnd.Both, 5 * GetSize(Viewport), CurveExtensionStyle.Line);
-                crv = crv ?? curve;
-                CreatePatternCurve(new GH_Curve(crv), LineType);
+                var crvs = poly.Offset(drawRect.Plane, offsetDistance, tolerance, CurveOffsetCornerStyle.Sharp);
+                if(crvs == null)
+                {
+                    CreatePatternCurve(new GH_Curve(poly), LineType);
+                }
+                else crvs.ToList().ForEach((c) =>
+                {
+                    CreatePatternCurve(new GH_Curve(c), LineType);
+                });
             });
-
-            base.DrawViewportWires(Viewport, Display, WireColour_Selected, ShadeMaterial_Selected, selected);
+            base.DrawViewportWires(Viewport, Display, drawRect, unitPerPx, WireColour_Selected, ShadeMaterial_Selected, selected);
         }
 
-        protected override double GetSizeMulty(RhinoViewport viewport)
+        public static Polyline CurveExtend(Polyline curve, double length)
         {
-            // get the current view corners
-            Point3d[] m_farCorners = viewport.GetFarRect();
-            Point3d[] m_nearCorners = viewport.GetNearRect();
+            if (curve == null || curve.IsClosed || curve.Count < 2) return curve;
 
-            Point3d[] m_viewCorners = new Point3d[3]
-            {
-                (m_farCorners[0] * 0.15 + m_nearCorners[0] * 0.85),
-                (m_farCorners[1] * 0.15 + m_nearCorners[1] * 0.85),
-                (m_farCorners[2] * 0.15 + m_nearCorners[2] * 0.85)
-                };
+            Vector3d startDir = Point3d.Subtract(curve[0], curve[1]);
+            Vector3d endDir = Point3d.Subtract(curve[curve.Count - 1], curve[curve.Count - 2]);
 
-            //e.Viewport.GetNearRect();
+            startDir.Unitize();
+            startDir *= length;
+            endDir.Unitize();
+            endDir *= length;
 
-            double m_viewWidth = m_viewCorners[0].DistanceTo(m_viewCorners[1]);
+            Point3d startPt = Point3d.Add(curve[0], startDir);
+            Point3d endPt = Point3d.Add(curve[curve.Count - 1], endDir);
 
-            double vpSize = 1;
-            if (!Absolute) viewport.GetWorldToScreenScale(Geometry.ClippingBox.Center, out vpSize);
+            return ReplaceBothPoint(curve, startPt, endPt);
+        }
 
-            return   viewport.Size.Width/m_viewWidth / vpSize;
+        private static Polyline ReplaceBothPoint(Polyline curve, Point3d startPt, Point3d endPt)
+        {
+           return  ReplacePoint(ReplacePoint(curve, 0, startPt), curve.Count - 1, endPt);
+        }
+
+        private static Polyline ReplacePoint(Polyline curve, int index, Point3d newPt)
+        {
+            curve.RemoveAt(index);
+            curve.Insert(index, newPt);
+            return curve;
         }
     }
 }

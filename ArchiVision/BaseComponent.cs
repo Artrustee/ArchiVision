@@ -35,7 +35,7 @@ namespace ArchiVision
         /// Initializes a new instance of the BaseComponent class.
         /// </summary>
         public BaseComponent(string name, string nickname, string description, Subcategory subcategory)
-          : base(name, nickname, description, "ArchiVision", subcategory.ToString())
+          : base(name, nickname, description, "ArchiVision", subcategory.ToString().Replace('_',' '))
         {
         }
 

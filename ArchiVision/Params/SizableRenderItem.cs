@@ -7,6 +7,7 @@
 
 using Grasshopper.Kernel;
 using Rhino.Display;
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,30 +17,35 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public abstract class SizableRenderItem :BaseRenderItem
+    public abstract class SizableRenderItem :AttributeRenderItem
     {
-
-        protected double Size {private get; set; }
+        protected double InputSize { get; set; }
 
         public bool Absolute { get; protected set; }
 
         public SizableRenderItem(IGH_PreviewData geometry, double size, bool absolute, Color color = default(Color), bool topMost = false)
             :base(geometry, color, topMost)
         {
-            Size = size;
+            InputSize = size;
             Absolute = absolute;
         }
 
-        protected double GetSize(RhinoViewport viewport)
+        protected double GetSize(RhinoViewport viewport, double UnitPerPx)
         {
-            return GetSizeMulty(viewport) * Size;
-        }
-
-        protected virtual double GetSizeMulty(RhinoViewport viewport)
-        {
-            double vpSize = 1;
-            if (Absolute) viewport.GetWorldToScreenScale(Geometry.ClippingBox.Center, out vpSize);
-            return vpSize;
+            double mult;
+            if (IsTopMost)
+            {
+                double vpSize = 1;
+                if (!Absolute) viewport.GetWorldToScreenScale(Geometry.ClippingBox.Center, out vpSize);
+                mult = UnitPerPx / vpSize;
+            }
+            else
+            {
+                double vpSize = 1;
+                if (Absolute) viewport.GetWorldToScreenScale(Geometry.ClippingBox.Center, out vpSize);
+                mult = vpSize;
+            }
+            return mult * InputSize;
         }
     }
 }

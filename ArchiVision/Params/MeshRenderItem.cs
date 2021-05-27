@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class MeshRenderItem : BaseRenderItem
+    public class MeshRenderItem : AttributeRenderItem
     {
 		public override Color Colour  => Shader.Diffuse;
 
@@ -90,14 +90,25 @@ namespace ArchiVision
 			if (outLineAtt != null) SubRenderItem.Add(new MeshOutlineRenderItem(geometry, outLineAtt));
 		}
 
-        public override void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public void RemoveOutLineRenderItem()
         {
-			DisplayMaterial mate = selected ? ShadeMaterial_Selected : Shader;
-			Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, mate);
-
-			base.DrawViewportMeshes(Viewport, Display, WireColour_Selected, ShadeMaterial_Selected, selected);
+            foreach (var item in SubRenderItem)
+            {
+                if(item is MeshOutlineRenderItem)
+                {
+                    SubRenderItem.Remove(item);
+                    return;
+                }
+            }
         }
 
+        public override void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        {
+            DisplayMaterial mate = selected ? ShadeMaterial_Selected : Shader;
+            Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, mate);
+
+            base.DrawViewportMeshes(Viewport, Display, drawRect, unitPerPx, WireColour_Selected, ShadeMaterial_Selected, selected);
+        }
 
     }
 

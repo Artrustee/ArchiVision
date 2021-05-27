@@ -8,6 +8,7 @@
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Rhino.Display;
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,9 +27,9 @@ namespace ArchiVision
         {
             PtStyle = style;
         }
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
         {
-            Display.DrawPoint(((GH_Point)Geometry).Value, PtStyle, (int)GetSize(Viewport), Colour);
+            Display.DrawPoint(((GH_Point)Geometry).Value, PtStyle, (int)GetSize(Viewport, unitPerPx), Colour);
         }
     }
 }

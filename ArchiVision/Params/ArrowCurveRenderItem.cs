@@ -40,12 +40,12 @@ namespace ArchiVision
             ArrowMult = mult;
         }
 
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
         {
-            base.DrawViewportWires(Viewport, Display, WireColour_Selected, ShadeMaterial_Selected, selected);
+            base.DrawViewportWires(Viewport, Display, drawRect, unitPerPx, WireColour_Selected, ShadeMaterial_Selected, selected);
 
             Color colour = selected ? WireColour_Selected : Colour;
-            double vpSize = GetSize(Viewport);
+            double vpSize = GetSize(Viewport, unitPerPx);
 
             Curve curve = ((GH_Curve)Geometry).Value;
             double arrowSize = vpSize * ArrowMult;

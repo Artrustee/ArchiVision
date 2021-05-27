@@ -47,7 +47,7 @@ namespace ArchiVision
         protected sealed override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             this.Hidden = true;
-            pManager.AddParameter(new RenderItemParameter<IGH_PreviewData>());
+            pManager.AddParameter(new RenderItemParameter());
         }
 
         protected void AddShaderParam(GH_Component.GH_InputParamManager pManager)

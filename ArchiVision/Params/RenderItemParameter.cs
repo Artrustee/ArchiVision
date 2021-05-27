@@ -15,7 +15,7 @@ using Rhino.Display;
 
 namespace ArchiVision
 {
-    public class RenderItemParameter<T> : GH_Param<RenderItemGoo>, IGH_PreviewObject where T:IGH_PreviewData
+    public class RenderItemParameter : GH_Param<RenderItemGoo>
     {
         #region Values
 
@@ -61,15 +61,7 @@ namespace ArchiVision
                     {
                         continue;
                     }
-                    IGH_PreviewData iGH_PreviewData = current2.Value.Geometry;
-                    if (iGH_PreviewData != null)
-                    {
-                        BoundingBox clippingBox = iGH_PreviewData.ClippingBox;
-                        if (clippingBox.IsValid)
-                        {
-                            m_clippingBox.Union(clippingBox);
-                        }
-                    }
+                    m_clippingBox.Union(current2.Value.ClippingBox);
                 }
             }
             return m_clippingBox;
@@ -117,7 +109,7 @@ namespace ArchiVision
         }
 
         public RenderItemParameter(GH_ParamAccess access)
-            : base("Render Item", "R", "Render Item", "ArchiVision", "UI Element", access)
+            : base("Render Item", "Ri", "Render Item", "ArchiVision", "UI Element", access)
         {
             //_conduit = new ArchiVisionConduitForParam<T>(this) { Enabled = true };
         }

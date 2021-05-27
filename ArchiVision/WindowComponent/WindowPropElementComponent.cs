@@ -79,7 +79,7 @@ namespace ArchiVision.WindowComponent
             pManager.AddColourParameter("SecondaryHueMidBrush", "SM", "SecondaryHueMidBrush", GH_ParamAccess.item);
             pManager[10].Optional = true;
 
-            pManager.AddColourParameter("SecondaryHueMidForegroundBrush", "SM", "SecondaryHueMidForegroundBrush", GH_ParamAccess.item);
+            pManager.AddColourParameter("SecondaryHueMidForegroundBrush", "SMF", "SecondaryHueMidForegroundBrush", GH_ParamAccess.item);
             pManager[11].Optional = true;
         }
 

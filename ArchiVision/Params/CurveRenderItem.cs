@@ -105,6 +105,7 @@ namespace ArchiVision
                 if (goon)
                 {
                     Curve[] crvs = curve.Split(t);
+                    if (crvs == null) break;
                     curves.Add(crvs[0]);
                     curve = crvs[1];
                 }
@@ -114,10 +115,10 @@ namespace ArchiVision
             return curves.ToArray();
         }
 
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
         {
             Color colour = selected ? WireColour_Selected : Colour;
-            double vpSize = GetSize(Viewport);
+            double vpSize = GetSize(Viewport, unitPerPx);
 
             PatternCurve.ForEach((crv) => Display.DrawCurve(crv, colour, (int)(vpSize)));
             Display.DrawPoints(Points, PointStyle.Circle, (int)(vpSize / 2), colour);

@@ -133,6 +133,16 @@ namespace ArchiVision.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MergedRenderItemComponent_24_24 {
+            get {
+                object obj = ResourceManager.GetObject("MergedRenderItemComponent_24_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PointRenderItemComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("PointRenderItemComponent_24_24", resourceCulture);

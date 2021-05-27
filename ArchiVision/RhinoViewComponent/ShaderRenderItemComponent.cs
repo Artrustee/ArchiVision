@@ -42,7 +42,7 @@ namespace ArchiVision.RhinoViewComponent
         /// Initializes a new instance of the ConstructRenderItem class.
         /// </summary>
         public ShaderRenderItemComponent()
-          : base("Shader Render Item", "C Ri", "Shader Render Item")
+          : base("Shader Render Item", "S Ri", "Shader Render Item")
         {
 
         }

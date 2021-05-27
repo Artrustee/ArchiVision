@@ -17,52 +17,18 @@ using System.Threading.Tasks;
 namespace ArchiVision
 {
 
-    public class ConduitBase: DisplayConduit
+    public class ArchiVisionConduitForView : DisplayConduit
     {
-        protected void CaBoundingBox(CalculateBoundingBoxEventArgs e, List<BaseRenderItem> _items)
-        {
-            Point3d[] m_farCorners = e.Viewport.GetFarRect();
-            Point3d[] m_nearCorners = e.Viewport.GetNearRect();
-
-            Point3d[] m_viewCorners = new Point3d[4]
-            {
-                (m_farCorners[0] * 0.15 + m_nearCorners[0] * 0.85),
-                (m_farCorners[1] * 0.15 + m_nearCorners[1] * 0.85),
-                (m_farCorners[2] * 0.15 + m_nearCorners[2] * 0.85),
-                (m_farCorners[3] * 0.15 + m_nearCorners[3] * 0.85)
-                };
-
-            BoundingBox box = new BoundingBox(m_viewCorners);
-
-            e.IncludeBoundingBox(box);
-
-            if (_items == null) return;
-
-            BoundingBox b = BoundingBox.Empty;
-            _items.ForEach((item) => b.Union(item.Geometry.ClippingBox));
-
-            e.IncludeBoundingBox(b);
-        }
-
-        protected void DrawFore(DrawEventArgs e, List<BaseRenderItem> _items)
-        {
-            if (_items == null) return;
-            _items.ForEach((item) =>
-            {
-                item.DrawViewportWires(e);
-                item.DrawViewportMeshes(e);
-            });
-        }
-    }
-
-    public class ArchiVisionConduitForView : ConduitBase
-    {
-        public RhinoViewPropertyComponent Owner { get; set; }
+        public RhinoViewPropertyComponent Owner { get; }
 
         public ArchiVisionConduitForView(RhinoViewPropertyComponent owner)
         {
             Owner = owner;
         }
+
+        public Rectangle3d DrawRect { get; protected set; }
+
+        public double UnitPerPx { get; protected set; }
 
         protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
         {
@@ -77,27 +43,56 @@ namespace ArchiVision
             base.DrawForeground(e);
             DrawFore(e, Owner.FindItems(e.Viewport));
         }
+
+        protected void CaBoundingBox(CalculateBoundingBoxEventArgs e, List<BaseRenderItem> _items)
+        {
+            UpdateDrawInfo(e.Viewport);
+            BoundingBox box = BoundingBox.Empty;
+            DrawRect.ToNurbsCurve().Offset(DrawRect.Plane, Math.Max(DrawRect.Width, DrawRect.Height) / 4, Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance, CurveOffsetCornerStyle.Sharp).ToList().ForEach((curve) =>
+            {
+                box.Union(curve.GetBoundingBox(false));
+            });
+
+            e.IncludeBoundingBox(box);
+
+            if (_items == null) return;
+
+            BoundingBox b = BoundingBox.Empty;
+            _items.ForEach((item) => b.Union(item.ClippingBox));
+
+            e.IncludeBoundingBox(b);
+        }
+
+        protected void DrawFore(DrawEventArgs e, List<BaseRenderItem> _items)
+        {
+            if (_items == null) return;
+            _items.ForEach((item) =>
+            {
+                item.DrawViewportWires(e, DrawRect, UnitPerPx);
+                item.DrawViewportMeshes(e, DrawRect, UnitPerPx);
+            });
+        }
+
+        public void UpdateDrawInfo(RhinoViewport viewport)
+        {
+            // get the current view corners
+            Point3d[] m_farCorners = viewport.GetFarRect();
+            Point3d[] m_nearCorners = viewport.GetNearRect();
+
+            Point3d[] m_viewCorners = new Point3d[3]
+            {
+                (m_farCorners[0] * 0.15 + m_nearCorners[0] * 0.85),
+                (m_farCorners[1] * 0.15 + m_nearCorners[1] * 0.85),
+                (m_farCorners[2] * 0.15 + m_nearCorners[2] * 0.85)
+                };
+
+            //e.Viewport.GetNearRect();
+            Plane m_drawPlane = new Plane(m_viewCorners[0], m_viewCorners[1], m_viewCorners[2]);
+            double m_viewWidth = m_viewCorners[0].DistanceTo(m_viewCorners[1]);
+            double m_viewHeight = m_viewCorners[0].DistanceTo(m_viewCorners[2]);
+
+            DrawRect = new Rectangle3d(m_drawPlane, m_viewWidth, m_viewHeight);
+            UnitPerPx = viewport.Size.Width / m_viewWidth;
+        }
     }
-
-    //public class ArchiVisionConduitForParam<T> : ConduitBase where T : IGH_PreviewData
-    //{
-    //    public RenderItemParameter<T> Owner { get; set; }
-
-    //    public ArchiVisionConduitForParam(RenderItemParameter<T> owner)
-    //    {
-    //        Owner = owner;
-    //    }
-
-    //    protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
-    //    {
-    //        base.CalculateBoundingBox(e);
-    //        CaBoundingBox(e, Owner.FindItems());
-    //    }
-
-    //    protected override void DrawForeground(DrawEventArgs e)
-    //    {
-    //        base.DrawForeground(e);
-    //        DrawFore(e, Owner.FindItems());
-    //    }
-    //}
 }

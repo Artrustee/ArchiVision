@@ -71,7 +71,7 @@ namespace ArchiVision
             pManager.AddParameter(new UIElementParameter());
             pManager.AddParameter(Helper.CreateViewParam());
             pManager[1].Optional = true;
-            pManager.AddParameter(new RenderItemParameter<IGH_PreviewData>(GH_ParamAccess.tree));
+            pManager.AddParameter(new RenderItemParameter(GH_ParamAccess.tree));
             pManager[2].Optional = true;
         }
 
@@ -122,7 +122,7 @@ namespace ArchiVision
                         {
                             if (goo == null) return;
                             preItems.Add(goo.Value);
-                            BoundingBox relay = goo.Value.Geometry.ClippingBox;
+                            BoundingBox relay = goo.Value.ClippingBox;
                             box.Union(relay);
                             _boundingBox.Union(relay);
                         });

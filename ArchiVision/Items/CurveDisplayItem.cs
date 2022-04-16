@@ -19,30 +19,46 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class CurveRenderItem : SizableRenderItem
+    public class CurveDisplayItem : SizableDisplayIItem
     {
         public List<Curve> PatternCurve { get; } = new List<Curve>();
 
         public List<Point3d> Points { get; } = new List<Point3d>();
 
-        public CurveRenderItem(GH_Curve curve, CurveRenderAttribute att, bool topMost = false)
-            : this(curve, att.Colour, att.Thickness, att.LineType, att.Absolute, topMost)
+        public override BoundingBox ClippingBox
+        {
+            get
+            {
+                BoundingBox box = base.ClippingBox;
+                foreach (var item in PatternCurve)
+                {
+                    box.Union(item.GetBoundingBox(true));
+                }
+                foreach (var item in Points)
+                {
+                    box.Union(item);
+                }
+                return box;
+            }
+        }
+
+        public CurveDisplayItem(GH_Curve curve, CurveDisplayAttribute att)
+            : this(curve, att.Colour, att.Thickness, att.LineType, att.Absolute, att.TopMost)
         {
         }
 
-        public CurveRenderItem(GH_Curve curve, Color color, double thickness, Linetype linetype, bool absolute, bool topMost = false)
+        public CurveDisplayItem(GH_Curve curve, Color color, double thickness, Linetype linetype, bool absolute, bool topMost = false)
             : base(curve, thickness, absolute, color, topMost)
         {
             PatternCurve.Clear();
             Points.Clear();
 
-            if (curve != null)
-                CreatePatternCurve(curve, linetype);
+            if (curve != null) CreatePatternCurve(curve, linetype);
         }
 
         protected void CreatePatternCurve(GH_Curve curve, Linetype linetype)
         {
-            if (linetype.Index == -1)
+            if (linetype == null || linetype.Index == -1)
             {
                 PatternCurve.Add(curve.Value);
                 return;

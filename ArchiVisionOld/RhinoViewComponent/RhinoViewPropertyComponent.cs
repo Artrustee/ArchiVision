@@ -32,7 +32,7 @@ namespace ArchiVision
         private BoundingBox _boundingBox;
         public override BoundingBox ClippingBox => _boundingBox;
 
-        private ArchiVisionConduitForView _conduit;
+        public static ArchiVisionConduit Conduit { get; } = new ArchiVisionConduit() { Enabled = true };
 
         public Dictionary<string, List<BaseRenderItem>> PreviewObjects { get; } = new Dictionary<string, List<BaseRenderItem>>();
 
@@ -59,7 +59,6 @@ namespace ArchiVision
               "RhinoView Property", Subcategory.UI_RhinoView)
         {
             this.Hidden = false;
-            _conduit = new ArchiVisionConduitForView(this) { Enabled = true };
         }
 
         #region Calculate
@@ -87,6 +86,8 @@ namespace ArchiVision
 
         protected override void BeforeSolveInstance()
         {
+            if (!Conduit.PropertyComponents.Contains(this))
+                Conduit.PropertyComponents.Add(this);
             PreviewObjects.Clear();
             _boundingBox = BoundingBox.Empty;
         }
@@ -150,21 +151,21 @@ namespace ArchiVision
 
         public override void DrawViewportWires(IGH_PreviewArgs args)
         {
-            List<BaseRenderItem> _items = FindItems(args.Viewport);
+            List<BaseRenderItem> _items = FindRenderItems(args.Viewport);
             if (_items == null) return;
             _items.ForEach((item) => item.DrawViewportWires(args, base.Attributes.Selected));
         }
 
         public override void DrawViewportMeshes(IGH_PreviewArgs args)
         {
-            List<BaseRenderItem> _items = FindItems(args.Viewport);
+            List<BaseRenderItem> _items = FindRenderItems(args.Viewport);
             if (_items == null) return;
             _items.ForEach((item) => item.DrawViewportMeshes(args, base.Attributes.Selected));
         }
 
 
 
-        public List<BaseRenderItem> FindItems(RhinoViewport viewport)
+        public List<BaseRenderItem> FindRenderItems(RhinoViewport viewport)
         {
             if (PreviewObjects == null || string.IsNullOrEmpty(viewport.Name))
             {
@@ -203,7 +204,7 @@ namespace ArchiVision
 
         public override void RemovedFromDocument(GH_Document document)
         {
-            _conduit.Enabled = false;
+            Conduit.PropertyComponents.Remove(this);
             base.RemovedFromDocument(document);
         }
 
@@ -214,12 +215,12 @@ namespace ArchiVision
                 base.DocumentContextChanged(document, context);
                 if (context == GH_DocumentContext.Close || context == GH_DocumentContext.Unloaded)
                 {
-                    _conduit.Enabled = false;
+                    Conduit.Enabled = false;
                 }
                 else if ((context == GH_DocumentContext.Open || context == GH_DocumentContext.Loaded) &&
-                    _conduit.Enabled == false && _conduit != null)
+                    Conduit.Enabled == false && Conduit != null)
                 {
-                    _conduit.Enabled = true;
+                    Conduit.Enabled = true;
                 }
             }
             catch { }

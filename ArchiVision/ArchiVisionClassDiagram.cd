@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ArchiVision.DisplayItem">
+    <Position X="6" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAQAACAA=</HashCode>
+      <FileName>Items\DisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.SizableDisplayIItem">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAACAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Items\SizableDisplayIItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.AttributeDisplayItem">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAABAAgAA=</HashCode>
+      <FileName>Items\AttributeDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.CurveDisplayItem">
+    <Position X="2.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAhAAAIAAAIAAAgAAAAAAAAA=</HashCode>
+      <FileName>Items\CurveDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.ArrowCurveDisplayItem">
+    <Position X="0.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Items\ArrowCurveDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.MeshOutlineDisplayItem">
+    <Position X="5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAABAAAAACSAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Items\MeshOutlineDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.Param_DisplayItem">
+    <Position X="13" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gFAABAAABAAABAAAABAAABAQAAAACAAAAAAAIAEECCA=</HashCode>
+      <FileName>Parameters\Param_DisplayItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArchiVision.Param_CurveDisplayAttribute">
+    <Position X="15.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Parameters\Param_CurveDisplayAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.Parameters.Param_ArchiVision&lt;T&gt;">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Parameters\Param_ArchiVision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

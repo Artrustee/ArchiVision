@@ -22,16 +22,19 @@ namespace ArchiVision
         public Linetype LineType { get; set; }= Rhino.RhinoDoc.ActiveDoc.Linetypes.FindIndex(-1);
         public bool Absolute { get; set; } = true;
 
+        public bool TopMost { get; set; } = false;
+
         public CurveRenderAttribute()
         {
         }
 
-        public CurveRenderAttribute(Color color, double thickness, Linetype linetype, bool absolute)
+        public CurveRenderAttribute(Color color, double thickness, Linetype linetype, bool absolute, bool topMost)
         {
             this.Colour = color;
             this.Thickness = thickness;
             this.LineType = linetype;
             this.Absolute = absolute;
+            this.TopMost = topMost;
         }
 
         //public CurveRenderAttribute(CurveRenderAttribute other)

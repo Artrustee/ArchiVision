@@ -54,6 +54,7 @@ namespace ArchiVision
             pManager.AddNumberParameter("Thickness", "t", "Thickness", GH_ParamAccess.item, 2);
             pManager.AddTextParameter("LineType", "T", "LintType", GH_ParamAccess.item, "");
             pManager.AddBooleanParameter("Absolute", "A", "Absolute", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("TopMost", "M", "TopMost", GH_ParamAccess.item, false);
         }
 
         /// <summary>
@@ -74,16 +75,18 @@ namespace ArchiVision
             double thickness = 2;
             string lineT = "";
             bool abso = true;
+            bool topMost = false;
 
             DA.GetData(0, ref colour);
             DA.GetData(1, ref thickness);
             DA.GetData(2, ref lineT);
             DA.GetData(3, ref abso);
+            DA.GetData(4, ref topMost);
 
             Linetype realtype = Rhino.RhinoDoc.ActiveDoc.Linetypes.FindName(lineT);
             this.Message = realtype.Name;
 
-            DA.SetData(0, new CurveRenderAttribute(colour, thickness, realtype, abso));
+            DA.SetData(0, new CurveRenderAttribute(colour, thickness, realtype, abso, topMost));
         }
         #endregion
     }

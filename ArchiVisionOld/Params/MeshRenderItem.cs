@@ -53,6 +53,12 @@ namespace ArchiVision
 					{
 						if (!geometry.Value.TopologyEdges.IsNgonInterior(i))
 						{
+                            IndexPair verticeIndexPair = geometry.Value.TopologyEdges.GetTopologyVertices(i);
+                            Vector3f vector1 = geometry.Value.Normals[verticeIndexPair.I];
+                            Vector3f vector2 = geometry.Value.Normals[verticeIndexPair.J];
+                            vector1.Unitize(); vector2.Unitize();
+                            Vector3f normal = Vector3f.Add(vector1, vector2);
+
                             GH_Curve line = new GH_Curve(geometry.Value.TopologyEdges.EdgeLine(i).ToNurbsCurve());
                             int[] faces = geometry.Value.TopologyEdges.GetConnectedFaces(i);
                             switch (faces.Length)
@@ -104,6 +110,7 @@ namespace ArchiVision
 
         public override void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
         {
+
             DisplayMaterial mate = selected ? ShadeMaterial_Selected : Shader;
             Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, mate);
 

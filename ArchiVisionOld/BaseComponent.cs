@@ -46,4 +46,20 @@ namespace ArchiVision
             pManager.AddParameter(obj, "------", "---", "------", GH_ParamAccess.tree);
         }
     }
+
+    //public class Solution
+    //{
+    //    public IList<IList<int>> GetSkyline(int[][] buildings)
+    //    {
+    //        //Convert to list.
+    //        List<int[]> bds = new List<int[]>();
+    //        foreach (int[] building in buildings)
+    //            bds.Add(building);
+
+    //        //Sort the list.
+    //        bds.Sort((x, y) => x[0].CompareTo(y[0]));
+
+
+    //    }
+    //}
 }

@@ -24,7 +24,7 @@ namespace ArchiVision
         public Linetype LineType { get; set; }
 
         public MeshOutlineRenderItem(GH_Mesh mesh, CurveRenderAttribute att)
-            : base(null, att, true)
+            : base(null, att.Colour, att.Thickness, att.LineType, att.Absolute, true)
         {
             Geometry = mesh;
             LineType = att.LineType;
@@ -47,8 +47,8 @@ namespace ArchiVision
 
             double thickness = GetSize(Viewport, unitPerPx);
             double tolerance = RhinoDoc.ActiveDoc?.ModelAbsoluteTolerance ?? 0.001;
-            //double offsetDistance = thickness / unitPerPx / 2;
-            double offsetDistance = 0;
+            double offsetDistance = thickness / unitPerPx / 2;
+            //double offsetDistance = 0;
             ((GH_Mesh)Geometry).Value.GetOutlines(new ViewportInfo(Viewport), drawRect.Plane).ToList().ForEach((polyline) =>
             {
                 //Polyline poly = CurveExtend(polyline, 5 * (thickness + offsetDistance));

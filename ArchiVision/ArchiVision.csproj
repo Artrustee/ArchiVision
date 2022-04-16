@@ -1,210 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{564892DC-B143-4712-9168-0E0ADF6358FD}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ArchiVision</RootNamespace>
-    <AssemblyName>ArchiVision</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkProfile />
+    <TargetFramework>net48</TargetFramework>
+    <Version>1.0</Version>
+    <Title>ArchiVision</Title>
+    <Description>Description of ArchiVision</Description>
+    <TargetExt>.gha</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+  
   <ItemGroup>
-    <Reference Include="GH_IO">
-      <HintPath>..\GH_IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Grasshopper">
-      <HintPath>..\Grasshopper.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveCharts">
-      <HintPath>..\LiveCharts.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveCharts.Wpf">
-      <HintPath>..\LiveCharts.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignColors">
-      <HintPath>..\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf">
-      <HintPath>..\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="RhinoCommon">
-      <HintPath>..\RhinoCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="RhinoWindows">
-      <HintPath>..\RhinoWindows.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
+    <PackageReference Include="Grasshopper" Version="7.0.20314.3001" IncludeAssets="compile;build" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Compile Include="ArchiVisionInfo.cs" />
-    <Compile Include="BaseComponent.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="Params\ArrowCurveRenderItem.cs" />
-    <Compile Include="Params\AttributeRenderItem.cs" />
-    <Compile Include="Params\CurveRenderAttributeGoo.cs" />
-    <Compile Include="Params\CurveRenderAttributeParameter.cs" />
-    <Compile Include="Params\CurveRenderItem.cs" />
-    <Compile Include="Params\CurveRenderAttribute.cs" />
-    <Compile Include="Params\MergedMeshRenderItem.cs" />
-    <Compile Include="Params\MeshOutlineRenderItem.cs" />
-    <Compile Include="Params\MeshRenderItem.cs" />
-    <Compile Include="Params\BaseRenderItem.cs" />
-    <Compile Include="Params\PointRenderItem.cs" />
-    <Compile Include="Params\RenderItemGoo.cs" />
-    <Compile Include="Params\RenderItemParameter.cs" />
-    <Compile Include="Params\SizableRenderItem.cs" />
-    <Compile Include="Params\UIElementGoo.cs" />
-    <Compile Include="Params\UIElementParameter.cs" />
-    <Compile Include="Params\WindowGoo.cs" />
-    <Compile Include="Params\WindowParameter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
+    <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RhinoViewComponent\ArchiVisionConduitForView.cs" />
-    <Compile Include="RhinoViewComponent\BaseRenderItemComponent.cs" />
-    <Compile Include="RhinoViewComponent\CurveRenderItemAttributeComponent.cs" />
-    <Compile Include="RhinoViewComponent\MergedShaderRenderItemComponent.cs" />
-    <Compile Include="RhinoViewComponent\ShaderRenderItemComponent.cs" />
-    <Compile Include="RhinoViewComponent\CurveRenderItemComponent.cs" />
-    <Compile Include="RhinoViewComponent\PointRenderItemComponent.cs" />
-    <Compile Include="Subcategory.cs" />
-    <Compile Include="UIElementComponent\ElementComponent.cs" />
-    <Compile Include="UIElementComponent\ElementGridPropertyComponent.cs" />
-    <Compile Include="UIElementComponent\ElementPropertyComponent.cs" />
-    <Compile Include="UIElementComponent\GridElementComponent.cs" />
-    <Compile Include="UIElementComponent\ImportElementComponent.cs" />
-    <Compile Include="RhinoViewComponent\RhinoViewElementComponent.cs" />
-    <Compile Include="RhinoViewComponent\RhinoViewPropertyComponent.cs" />
-    <Compile Include="UIElementComponent\SliderElementComponent.cs" />
-    <Compile Include="WindowComponent\WindowPropElementComponent.cs" />
-    <Compile Include="WindowComponent\WindowUIComponent.cs" />
-    <Compile Include="WPF\MaterialDesignWindow.xaml.cs">
-      <DependentUpon>MaterialDesignWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WPF\UserControlHelper.cs" />
   </ItemGroup>
+  
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\UIElementParameter_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="WPF\MaterialDesignWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\WindowParameter_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\WindowComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RhinoViewElementComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\GridElementComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ElementPropertyComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ElementGridPropertyComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\WindowAddElementComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RenderItemParameter_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SliderElementComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RhinoViewPropertyElementComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ConstructRenderItemComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CurveRenderItemComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PointRenderItemComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CurveRenderAttributeParameter_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CurveRenderItemAttributeComponent_24-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MergedRenderItemComponent_24-24.png" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\教学专用\AppData\Roaming\Grasshopper\Libraries\$(ProjectName).gha"
-Copy "$(TargetPath)" "C:\Users\Administrator\AppData\Roaming\Grasshopper\Libraries\$(ProjectName).gha"</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <FallbackCulture>en-US</FallbackCulture>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartProgram>E:\Software\Install\Mcneel\Rhino7\System\Rhino.exe</StartProgram>
-    <StartArguments>
-    </StartArguments>
+  
+  <PropertyGroup Condition="$(Configuration) == 'Debug' AND $([MSBuild]::IsOSPlatform(Windows))">
+    <StartProgram>E:\Software\Rhino 7\System\Rhino.exe</StartProgram>
+    <StartArguments></StartArguments>
     <StartAction>Program</StartAction>
   </PropertyGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="Copy &quot;$(TargetPath)&quot; &quot;C:\Users\ArchiTed\AppData\Roaming\Grasshopper\Libraries\$(ProjectName).gha&quot;" />
+  </Target>
+
 </Project>

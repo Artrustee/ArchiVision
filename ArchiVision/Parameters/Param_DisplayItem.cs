@@ -12,17 +12,18 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using Rhino.Display;
+using ArchiVision.Parameters;
 
 namespace ArchiVision
 {
-    public class RenderItemParameter : GH_Param<RenderItemGoo>
+    public class Param_DisplayItem : Param_ArchiVision<GH_DisplayItem>, IGH_PreviewObject
     {
         #region Values
 
         //private ArchiVisionConduitForParam<T> _conduit;
         #region Basic Component info
 
-        public override GH_Exposure Exposure => GH_Exposure.hidden;
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -34,7 +35,26 @@ namespace ArchiVision
         /// </summary>
         public override Guid ComponentGuid => new Guid("8c28ec2c-06b6-40f5-91c5-d7c3faed3245");
 
-        public bool Hidden { get; set; }
+        private bool _hidden = true;
+        public bool Hidden
+        {
+            get
+            {
+                return _hidden;
+            }
+            set
+            {
+                _hidden = value;
+                if (value)
+                {
+                    ArchiVisionInfo.Conduit.ItemParams.Remove(this);
+                }
+                else
+                {
+                    ArchiVisionInfo.Conduit.ItemParams.Add(this);
+                }
+            }
+        }
 
         public bool IsPreviewCapable => true;
 
@@ -52,11 +72,11 @@ namespace ArchiVision
             {
                 return m_clippingBox;
             }
-            foreach (List<RenderItemGoo> branch in m_data.Branches)
+            foreach (List<GH_DisplayItem> branch in m_data.Branches)
             {
-                foreach (RenderItemGoo item in branch)
+                foreach (GH_DisplayItem item in branch)
                 {
-                    RenderItemGoo current2 = item;
+                    GH_DisplayItem current2 = item;
                     if (current2 == null || !current2.IsValid)
                     {
                         continue;
@@ -72,51 +92,38 @@ namespace ArchiVision
         /// <summary>
         /// Initializes a new instance of the UIElementParameter class.
         /// </summary>
-        public RenderItemParameter(string name, string nickname, string description, string category, string subcategory, GH_ParamAccess access)
-                : base(name, nickname, description, category, subcategory, access)
+        public Param_DisplayItem(string name, string nickname, string description, GH_ParamAccess access)
+                : base(name, nickname, description, access)
         {
-            //_conduit = new ArchiVisionConduitForParam<T>(this) { Enabled = true };
         }
 
-        //public override void RemovedFromDocument(GH_Document document)
-        //{
-        //    _conduit.Enabled = false;
-        //    base.RemovedFromDocument(document);
-        //}
-
-        //public override void DocumentContextChanged(GH_Document document, GH_DocumentContext context)
-        //{
-        //    try
-        //    {
-        //        base.DocumentContextChanged(document, context);
-        //        if (context == GH_DocumentContext.Close || context == GH_DocumentContext.Unloaded)
-        //        {
-        //            _conduit.Enabled = false;
-        //        }
-        //        else if ((context == GH_DocumentContext.Open || context == GH_DocumentContext.Loaded) &&
-        //            _conduit.Enabled == false && _conduit != null)
-        //        {
-        //            _conduit.Enabled = true;
-        //        }
-        //    }
-        //    catch { }
-        //}
-
-        public RenderItemParameter()
-        : this( GH_ParamAccess.item)
+        public override void RemovedFromDocument(GH_Document document)
         {
-            //_conduit = new ArchiVisionConduitForParam<T>(this) { Enabled = true };
+            ArchiVisionInfo.Conduit.ItemParams.Remove(this);
+            base.RemovedFromDocument(document);
         }
 
-        public RenderItemParameter(GH_ParamAccess access)
-            : base("Render Item", "Ri", "Render Item", "ArchiVision", "UI Element", access)
+        public Param_DisplayItem()
+        : this(GH_ParamAccess.item)
         {
-            //_conduit = new ArchiVisionConduitForParam<T>(this) { Enabled = true };
         }
 
-        public List<BaseRenderItem> FindItems()
+        public Param_DisplayItem(GH_ParamAccess access)
+            : base("Render Item", "Ri", "Render Item", access)
         {
-            List<BaseRenderItem> items = new List<BaseRenderItem>();
+
+        }
+
+        public override void PostProcessData()
+        {
+            if (!ArchiVisionInfo.Conduit.ItemParams.Contains(this))
+                ArchiVisionInfo.Conduit.ItemParams.Add(this);
+            base.PostProcessData();
+        }
+
+        public List<DisplayItem> FindItems()
+        {
+            List<DisplayItem> items = new List<DisplayItem>();
             m_data.ToList().ForEach((item) => items.Add(item.Value));
             return items;
         }
@@ -133,6 +140,14 @@ namespace ArchiVision
             m_data.ToList().ForEach((item) => item.Value.DrawViewportMeshes(args, base.Attributes.Selected));
         }
 
- 
+        public List<DisplayItem> FindRenderItems(RhinoViewport viewport)
+        {
+            List<DisplayItem> result = new List<DisplayItem>();
+            foreach (GH_DisplayItem value in m_data)
+            {
+                result.Add(value.Value);
+            }
+            return result;
+        }
     }
 }

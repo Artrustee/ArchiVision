@@ -19,7 +19,7 @@ namespace ArchiVision.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -65,7 +65,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap ConstructRenderItemComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("ConstructRenderItemComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("ConstructRenderItemComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -75,7 +75,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap CurveRenderAttributeParameter_24_24 {
             get {
-                object obj = ResourceManager.GetObject("CurveRenderAttributeParameter_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("CurveRenderAttributeParameter_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -85,7 +85,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap CurveRenderItemAttributeComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("CurveRenderItemAttributeComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("CurveRenderItemAttributeComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,7 +95,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap CurveRenderItemComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("CurveRenderItemComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("CurveRenderItemComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -105,7 +105,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap ElementGridPropertyComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("ElementGridPropertyComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("ElementGridPropertyComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -115,7 +115,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap ElementPropertyComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("ElementPropertyComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("ElementPropertyComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -125,7 +125,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap GridElementComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("GridElementComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("GridElementComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -135,7 +135,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap MergedRenderItemComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("MergedRenderItemComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("MergedRenderItemComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -145,7 +145,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap PointRenderItemComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("PointRenderItemComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("PointRenderItemComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -155,7 +155,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap RenderItemParameter_24_24 {
             get {
-                object obj = ResourceManager.GetObject("RenderItemParameter_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("RenderItemParameter_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,7 +165,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap RhinoViewElementComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("RhinoViewElementComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("RhinoViewElementComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -175,7 +175,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap RhinoViewPropertyElementComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("RhinoViewPropertyElementComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("RhinoViewPropertyElementComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -185,7 +185,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap SliderElementComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("SliderElementComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("SliderElementComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -195,7 +195,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap UIElementParameter_24_24 {
             get {
-                object obj = ResourceManager.GetObject("UIElementParameter_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("UIElementParameter_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -205,7 +205,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap WindowAddElementComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("WindowAddElementComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("WindowAddElementComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -215,7 +215,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap WindowComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("WindowComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("WindowComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -225,7 +225,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap WindowParameter_24_24 {
             get {
-                object obj = ResourceManager.GetObject("WindowParameter_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("WindowParameter_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

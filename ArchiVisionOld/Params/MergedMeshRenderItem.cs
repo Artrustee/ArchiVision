@@ -11,6 +11,7 @@ using Rhino.Geometry;
 using Rhino.Geometry.Intersect;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,71 @@ namespace ArchiVision
 
             if (intersectAttribute != null)
                 allInter.ForEach((crv) => SubRenderItem.Add(new CurveRenderItem(new GH_Curve(crv), intersectAttribute)));
+        }
+
+        public TimeSpan TaskTestMulti(int count, int max)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            Task[] tasks = new Task[count];
+            for (int i = 0; i < count; i++)
+            {
+                tasks[i] = Task.Run(() =>
+                {
+                    FindPrimeNumbers(max);
+                });
+            }
+            Task.WaitAll(tasks);
+
+            stopwatch.Stop();
+            return stopwatch.Elapsed;
+        }
+
+        public TimeSpan TaskTestCount(int count, int max, int taskCount)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            int oneTaskCount = count / taskCount + 1;
+            Task[] tasks = new Task[taskCount];
+            for (int i = 0; i < taskCount; i++)
+            {
+                tasks[i] = Task.Run(() =>
+                {
+                    for (int j = 0; j < oneTaskCount; j++)
+                    {
+                        FindPrimeNumbers(max);
+                    }
+                });
+            }
+            Task.WaitAll(tasks);
+
+            stopwatch.Stop();
+            return stopwatch.Elapsed;
+
+        }
+
+        private int[] FindPrimeNumbers(int max)
+        {
+            List<int> primeNumber = new List<int>(max);
+            for (int i = 2; i < max; i++)
+            {
+                bool isFind = false;
+                for (int j = 2; j <= Math.Sqrt(i); j++)
+                {
+                    if(i % j == 0)
+                    {
+                        isFind = true;
+                        break;
+                    }
+                }
+                if (!isFind)
+                {
+                    primeNumber.Add(i);
+                }
+            }
+            return primeNumber.ToArray();
         }
     }
 }

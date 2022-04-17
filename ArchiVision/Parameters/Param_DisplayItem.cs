@@ -35,30 +35,11 @@ namespace ArchiVision
         /// </summary>
         public override Guid ComponentGuid => new Guid("8c28ec2c-06b6-40f5-91c5-d7c3faed3245");
 
-        private bool _hidden = true;
-        public bool Hidden
-        {
-            get
-            {
-                return _hidden;
-            }
-            set
-            {
-                _hidden = value;
-                if (value)
-                {
-                    ArchiVisionInfo.Conduit.ItemParams.Remove(this);
-                }
-                else
-                {
-                    ArchiVisionInfo.Conduit.ItemParams.Add(this);
-                }
-            }
-        }
-
         public bool IsPreviewCapable => true;
 
         public BoundingBox ClippingBox => ComputeClippingBox();
+
+        public bool Hidden { get; set; }
 
         BoundingBox m_clippingBox;
         protected BoundingBox ComputeClippingBox()
@@ -121,23 +102,16 @@ namespace ArchiVision
             base.PostProcessData();
         }
 
-        public List<DisplayItem> FindItems()
-        {
-            List<DisplayItem> items = new List<DisplayItem>();
-            m_data.ToList().ForEach((item) => items.Add(item.Value));
-            return items;
-        }
-
         public void DrawViewportWires(IGH_PreviewArgs args)
         {
-            if (m_data.IsEmpty || Locked) return;
-            m_data.ToList().ForEach((item) => item.Value.DrawViewportWires(args, base.Attributes.Selected));
+            if (m_data.IsEmpty || Locked || Hidden) return;
+            m_data.ToList().ForEach((item) => item.Value.DrawViewportWires(args.Viewport, args.Display, base.Attributes.Selected));
         }
 
         public void DrawViewportMeshes(IGH_PreviewArgs args)
         {
-            if (m_data.IsEmpty || Locked) return;
-            m_data.ToList().ForEach((item) => item.Value.DrawViewportMeshes(args, base.Attributes.Selected));
+            if (m_data.IsEmpty || Locked || Hidden) return;
+            m_data.ToList().ForEach((item) => item.Value.DrawViewportMeshes(args.Viewport, args.Display, base.Attributes.Selected));
         }
 
         public List<DisplayItem> FindRenderItems(RhinoViewport viewport)

@@ -1,11 +1,4 @@
-﻿/*  Copyright 2021 RadiRhino-秋水. All Rights Reserved.
-
-    Distributed under MIT license.
-
-    See file LICENSE for detail or copy at http://opensource.org/licenses/MIT
-*/
-
-using Grasshopper.Kernel;
+﻿using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Rhino.Display;
 using Rhino.DocObjects;
@@ -19,44 +12,30 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class CurveDisplayItem : SizableDisplayIItem
+    public class CurveDisplayItem : GeometryDisplayItem
     {
+        public float Size { get; }
         public List<Curve> PatternCurve { get; } = new List<Curve>();
 
         public List<Point3d> Points { get; } = new List<Point3d>();
 
-        public override BoundingBox ClippingBox
-        {
-            get
-            {
-                BoundingBox box = base.ClippingBox;
-                foreach (var item in PatternCurve)
-                {
-                    box.Union(item.GetBoundingBox(true));
-                }
-                foreach (var item in Points)
-                {
-                    box.Union(item);
-                }
-                return box;
-            }
-        }
-
-        public CurveDisplayItem(GH_Curve curve, CurveDisplayAttribute att)
-            : this(curve, att.Colour, att.Thickness, att.LineType, att.Absolute, att.TopMost)
+        public CurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, CurveDisplayAttribute att)
+            : this(owner, curve, att.Colour, att.Thickness, att.LineType, att.TopMost)
         {
         }
 
-        public CurveDisplayItem(GH_Curve curve, Color color, double thickness, Linetype linetype, bool absolute, bool topMost = false)
-            : base(curve, thickness, absolute, color, topMost)
+        public CurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, Color color, float thickness, Linetype linetype, bool topMost)
+            : base(owner, curve, topMost)
         {
+            this.Colour = color;
+            this.Size = thickness;
             PatternCurve.Clear();
             Points.Clear();
 
             if (curve != null) CreatePatternCurve(curve, linetype);
         }
 
-        protected void CreatePatternCurve(GH_Curve curve, Linetype linetype)
+        protected void CreatePatternCurve(GH_Curve curve, Linetype linetype, double unitPerPx = 1)
         {
             if (linetype == null || linetype.Index == -1)
             {
@@ -64,7 +43,7 @@ namespace ArchiVision
                 return;
             }
 
-            double scale = Rhino.RhinoDoc.ActiveDoc.Linetypes.LinetypeScale;
+            double scale = Rhino.RhinoDoc.ActiveDoc.Linetypes.LinetypeScale / unitPerPx;
 
             List<double> lengths = new List<double>();
             double totalLen = 0;
@@ -131,13 +110,10 @@ namespace ArchiVision
             return curves.ToArray();
         }
 
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx)
         {
-            Color colour = selected ? WireColour_Selected : Colour;
-            double vpSize = GetSize(Viewport, unitPerPx);
-
-            PatternCurve.ForEach((crv) => Display.DrawCurve(crv, colour, (int)(vpSize)));
-            Display.DrawPoints(Points, PointStyle.Circle, (int)(vpSize / 2), colour);
+            PatternCurve.ForEach((crv) => Display.DrawCurve(crv, Colour, (int)Size));
+            Display.DrawPoints(Points, PointStyle.Circle, Size / 2, Colour);
         }
     }
 }

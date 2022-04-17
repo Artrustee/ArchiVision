@@ -83,7 +83,7 @@ namespace ArchiVision
 
             mult = Math.Max(mult, 1);
 
-            DA.SetData(0, new ArrowCurveDisplayItem(curve, att, start ,end, mult));
+            DA.SetData(0, new ArrowCurveDisplayItem(this, curve, att, start ,end, mult));
         }
         #endregion
     }

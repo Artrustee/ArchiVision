@@ -23,20 +23,26 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class MeshRenderItem : AttributeDisplayItem
+    public class MeshRenderItem : GeometryDisplayItem
     {
-		public override Color Colour  => Shader.Diffuse;
-
-		public DisplayMaterial Shader => Material.Value;
-
-        public GH_Material Material { get; private set; }
-
 		public CurveDisplayAttribute OutLineAtt { get; private set; }
 
-        public MeshRenderItem(GH_Mesh geometry, GH_Material material, CurveDisplayAttribute nakedEdgeAtt, CurveDisplayAttribute interiorEdgeAtt, CurveDisplayAttribute outLineAtt, CurveDisplayAttribute sharpEdgeAtt, double angle)
-            :base(geometry)
+        //public MeshRenderItem(IGH_DocumentObject owner, MeshRenderItem other)
+        //    : base(owner, other.Geometry, false)
+        //{
+        //    SubRenderItem.Clear();
+        //    this.Material = other.Material;
+        //    foreach (var item in other.SubRenderItem)
+        //    {
+        //        if (item is MeshOutlineDisplayItem) continue;
+        //        this.SubRenderItem.Add(item);
+        //    }
+        //}
+
+        public MeshRenderItem(IGH_DocumentObject owner, GH_Mesh geometry, GH_Material material, CurveDisplayAttribute nakedEdgeAtt, CurveDisplayAttribute interiorEdgeAtt, CurveDisplayAttribute outLineAtt, CurveDisplayAttribute sharpEdgeAtt, double angle)
+            :base(owner, geometry, false)
         {
-			Material = material;
+			Material = material.Value;
 			OutLineAtt = outLineAtt;
 
 			SubRenderItem.Clear();
@@ -84,37 +90,24 @@ namespace ArchiVision
 				}
 
 				if (nakedEdgeAtt != null)
-					naked.ForEach((crv) => SubRenderItem.Add(new CurveDisplayItem(crv, nakedEdgeAtt)));
+					naked.ForEach((crv) => SubRenderItem.Add(new CurveDisplayItem(owner, crv, nakedEdgeAtt)));
 
 				if (interiorEdgeAtt != null)
-					interior.ForEach((crv) => SubRenderItem.Add(new CurveDisplayItem(crv, interiorEdgeAtt)));
+					interior.ForEach((crv) => SubRenderItem.Add(new CurveDisplayItem(owner, crv, interiorEdgeAtt)));
 
 				if (sharpEdgeAtt != null)
-					sharp.ForEach((crv) => SubRenderItem.Add(new CurveDisplayItem(crv, sharpEdgeAtt)));
+					sharp.ForEach((crv) => SubRenderItem.Add(new CurveDisplayItem(owner, crv, sharpEdgeAtt)));
 			}
 
-			if (outLineAtt != null) SubRenderItem.Add(new MeshOutlineDisplayItem(geometry, outLineAtt));
+			if (outLineAtt != null) SubRenderItem.Add(new MeshOutlineDisplayItem(owner, geometry, outLineAtt));
 		}
 
-        public void RemoveOutLineRenderItem()
+
+        public override void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx)
         {
-            foreach (var item in SubRenderItem)
-            {
-                if(item is MeshOutlineDisplayItem)
-                {
-                    SubRenderItem.Remove(item);
-                    return;
-                }
-            }
-        }
+            Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, Material);
 
-        public override void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
-        {
-
-            DisplayMaterial mate = selected ? ShadeMaterial_Selected : Shader;
-            Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, mate);
-
-            base.DrawViewportMeshes(Viewport, Display, drawRect, unitPerPx, WireColour_Selected, ShadeMaterial_Selected, selected);
+            base.DrawViewportMeshes(Viewport, Display, drawRect, unitPerPx);
         }
 
     }

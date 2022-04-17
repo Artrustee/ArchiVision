@@ -17,7 +17,7 @@ using System.Drawing;
 
 namespace ArchiVision.RhinoViewComponent
 {
-    public class ShaderRenderItemComponent : Component_BaseDisplayItem
+    public class Component_ShaderRenderItem : Component_BaseDisplayItem
     {
         #region Values
         #region Basic Component info
@@ -41,7 +41,7 @@ namespace ArchiVision.RhinoViewComponent
         /// <summary>
         /// Initializes a new instance of the ConstructRenderItem class.
         /// </summary>
-        public ShaderRenderItemComponent()
+        public Component_ShaderRenderItem()
           : base("Shader Render Item", "S Ri", "Shader Render Item")
         {
 
@@ -100,7 +100,7 @@ namespace ArchiVision.RhinoViewComponent
 
                 if (mate.Value != null)
                 {
-                    DA.SetData(0, new MeshRenderItem(mesh, mate, naked, interior, outline, sharp, angle));
+                    DA.SetData(0, new MeshRenderItem(this, mesh, mate, naked, interior, outline, sharp, angle));
                 }
             }
         }

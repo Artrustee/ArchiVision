@@ -17,12 +17,16 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
+    /// <summary>
+    /// General Display Item.
+    /// </summary>
     public abstract class DisplayItem
     {
 
         protected List<DisplayItem> SubRenderItem { get; } = new List<DisplayItem>();
         public bool IsTopMost { get; }
-
+        private IGH_DocumentObject _owner;
+        public bool Selected => _owner.Attributes.Selected;
         public virtual BoundingBox ClippingBox 
         {
             get
@@ -33,53 +37,51 @@ namespace ArchiVision
             }
         }
 
-        public DisplayItem(bool topMost = false)
+        public DisplayItem(IGH_DocumentObject owner, bool topMost)
         {
             IsTopMost = topMost;
+            _owner = owner;
         }
 
         public virtual void DrawViewportWires( RhinoViewport Viewport, DisplayPipeline Display,
-            Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+            Rectangle3d drawRect, double unitPerPx)
         {
 
         }
 
         public virtual void DrawViewportMeshes( RhinoViewport Viewport, DisplayPipeline Display,
-            Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+            Rectangle3d drawRect, double unitPerPx)
         {
 
         }
 
-        public void DrawViewportWires(IGH_PreviewArgs args, bool selected) 
+        public void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, bool selected) 
         {
-            SubRenderItem.ForEach((sub) => sub.DrawViewportWires(args, selected));
+            SubRenderItem.ForEach((sub) => sub.DrawViewportWires(Viewport, Display, selected));
             if (IsTopMost) return;
-            DrawViewportWires(args.Viewport, args.Display, default(Rectangle3d), double.NaN, args.WireColour_Selected, args.ShadeMaterial_Selected, selected);
+            DrawViewportWires(Viewport, Display, default(Rectangle3d), double.NaN);
         }
 
-        public void DrawViewportMeshes(IGH_PreviewArgs args, bool selected) 
+        public void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, bool selected) 
         {
-            SubRenderItem.ForEach((sub) => sub.DrawViewportMeshes(args, selected));
-            if (IsTopMost) return;
-            DrawViewportMeshes(args.Viewport, args.Display, default(Rectangle3d), double.NaN, args.WireColour_Selected, args.ShadeMaterial_Selected, selected);
 
+            SubRenderItem.ForEach((sub) => sub.DrawViewportMeshes(Viewport, Display, selected));
+            if (IsTopMost) return;
+            DrawViewportMeshes(Viewport, Display, default(Rectangle3d), double.NaN);
         }
 
         public void DrawViewportWires(DrawEventArgs e, Rectangle3d drawRect, double unitPerPx)
         {
             SubRenderItem.ForEach((sub) => sub.DrawViewportWires(e, drawRect, unitPerPx));
             if (!IsTopMost) return;
-            DrawViewportWires(e.Viewport, e.Display, drawRect, unitPerPx, Color.White, null, false);
-
+            DrawViewportWires(e.Viewport, e.Display, drawRect, unitPerPx);
         }
 
         public void DrawViewportMeshes(DrawEventArgs e, Rectangle3d drawRect, double unitPerPx)
         {
             SubRenderItem.ForEach((sub) => sub.DrawViewportMeshes(e, drawRect, unitPerPx));
             if (!IsTopMost) return;
-            DrawViewportMeshes(e.Viewport, e.Display, drawRect, unitPerPx, Color.White, null, false);
-
+            DrawViewportMeshes(e.Viewport, e.Display, drawRect, unitPerPx);
         }
-
     }
 }

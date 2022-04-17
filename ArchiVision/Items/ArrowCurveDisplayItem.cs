@@ -24,38 +24,33 @@ namespace ArchiVision
 
         public double ArrowMult { get; protected set; }
 
-        public ArrowCurveDisplayItem(GH_Curve curve, CurveDisplayAttribute att, bool start, bool end, double mult)
-            :base(curve, att)
+        public ArrowCurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, CurveDisplayAttribute att, bool start, bool end, double mult)
+            :base(owner, curve, att)
         {
             StartArrow = start;
             EndArrow = end;
             ArrowMult = mult;
         }
 
-        public ArrowCurveDisplayItem(GH_Curve curve, Color color, double thickness, Linetype linetype, bool start, bool end, double mult, bool absolute)
-            : base(curve, color, thickness, linetype, absolute)
+        public ArrowCurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, Color color, float thickness, Linetype linetype, bool start, bool end, double mult, bool absolute)
+            : base(owner,curve, color, thickness, linetype, absolute)
         {
             StartArrow = start;
             EndArrow = end;
             ArrowMult = mult;
         }
 
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx)
         {
-            base.DrawViewportWires(Viewport, Display, drawRect, unitPerPx, WireColour_Selected, ShadeMaterial_Selected, selected);
-
-            if (!IsTopMost) return;
-
-            Color colour = selected ? WireColour_Selected : Colour;
-            double vpSize = GetSize(Viewport, unitPerPx);
+            base.DrawViewportWires(Viewport, Display, drawRect, unitPerPx);
 
             Curve curve = ((GH_Curve)Geometry).Value;
-            double arrowSize = vpSize * ArrowMult;
+            double arrowSize = Size * ArrowMult;
 
             if (StartArrow)
-                Display.DrawArrowHead(curve.PointAtStart - curve.TangentAtStart * arrowSize, -curve.TangentAtStart, colour, arrowSize, arrowSize);
+                Display.DrawArrowHead(curve.PointAtStart, -curve.TangentAtStart, Colour, arrowSize, arrowSize);
             if (EndArrow)
-                Display.DrawArrowHead(curve.PointAtEnd , curve.TangentAtEnd, colour, arrowSize, arrowSize);
+                Display.DrawArrowHead(curve.PointAtEnd , curve.TangentAtEnd, Colour, arrowSize, arrowSize);
         }
     }
 }

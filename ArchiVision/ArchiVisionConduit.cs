@@ -12,6 +12,9 @@ namespace ArchiVision
 
     public class ArchiVisionConduit : DisplayConduit
     {
+        /// <summary>
+        /// The Params used for display.
+        /// </summary>
         public List<Param_DisplayItem> ItemParams { get; } = new List<Param_DisplayItem>();
         //public List<RhinoViewPropertyComponent> PropertyComponents { get; } = new List<RhinoViewPropertyComponent>();
 
@@ -20,6 +23,9 @@ namespace ArchiVision
         /// </summary>
         public Rectangle3d DrawRect { get; protected set; }
 
+        /// <summary>
+        /// Get all display items.
+        /// </summary>
         public List<DisplayItem> DisplayItems 
         { 
             get
@@ -28,13 +34,17 @@ namespace ArchiVision
 
                 foreach (var item in ItemParams)
                 {
-                    result.AddRange(item.FindItems());
+                    if (item.Attributes.GetTopLevel.DocObject is IGH_PreviewObject itemOwner)
+                    {
+                        if (itemOwner.Hidden || item.Hidden) continue;
+                        result.AddRange(item.VolatileData.AllData(true).Select(goo => ((GH_DisplayItem)goo).Value));
+                    }
                 }
                 return result;
             }
         }
 
-        public double UnitPerPx { get; protected set; }
+        public double PixPerUnit { get; protected set; }
 
         protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
         {
@@ -57,13 +67,12 @@ namespace ArchiVision
             base.CalculateBoundingBox(e);
         }
 
-
         protected override void DrawForeground(DrawEventArgs e)
         {
             DisplayItems.ForEach((item) =>
             {
-                item.DrawViewportWires(e, DrawRect, UnitPerPx);
-                item.DrawViewportMeshes(e, DrawRect, UnitPerPx);
+                item.DrawViewportWires(e, DrawRect, PixPerUnit);
+                item.DrawViewportMeshes(e, DrawRect, PixPerUnit);
             });
             base.DrawForeground(e);
         }
@@ -76,9 +85,9 @@ namespace ArchiVision
 
             Point3d[] m_viewCorners = new Point3d[3]
             {
-                (m_farCorners[0] * 0.5 + m_nearCorners[0] * 0.5),
-                (m_farCorners[1] * 0.5 + m_nearCorners[1] * 0.5),
-                (m_farCorners[2] * 0.5 + m_nearCorners[2] * 0.5)
+                (m_farCorners[0] * 0.15 + m_nearCorners[0] * 0.85),
+                (m_farCorners[1] * 0.15 + m_nearCorners[1] * 0.85),
+                (m_farCorners[2] * 0.15 + m_nearCorners[2] * 0.85)
             };
 
             //e.Viewport.GetNearRect();
@@ -87,7 +96,7 @@ namespace ArchiVision
             double m_viewHeight = m_viewCorners[0].DistanceTo(m_viewCorners[2]);
 
             DrawRect = new Rectangle3d(m_drawPlane, m_viewWidth, m_viewHeight);
-            UnitPerPx = viewport.Size.Width / m_viewWidth;
+            PixPerUnit = viewport.Size.Width / m_viewWidth;
         }
     }
 }

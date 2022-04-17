@@ -1,11 +1,4 @@
-﻿/*  Copyright 2021 RadiRhino-秋水. All Rights Reserved.
-
-    Distributed under MIT license.
-
-    See file LICENSE for detail or copy at http://opensource.org/licenses/MIT
-*/
-
-using Rhino.DocObjects;
+﻿using Rhino.DocObjects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,23 +10,25 @@ namespace ArchiVision
 {
     public class CurveDisplayAttribute
     {
-        public Color Colour { get; set; } = Color.White;
-        public double Thickness { get; set; } = 2;
-        public Linetype LineType { get; set; }= Rhino.RhinoDoc.ActiveDoc.Linetypes.FindIndex(-1);
-        public bool Absolute { get; set; } = true;
+        public Color Colour { get; set; } 
+        public float Thickness { get; set; } 
+        public Linetype LineType { get; set; } 
 
-        public bool TopMost { get; set; } = false;
+        public bool TopMost { get; set; }
 
         public CurveDisplayAttribute()
         {
+            this.Colour = Color.White;
+            this.Thickness = 2;
+            this.LineType = Rhino.RhinoDoc.ActiveDoc.Linetypes.FindIndex(-1);
+            this.TopMost = false;
         }
 
-        public CurveDisplayAttribute(Color color, double thickness, Linetype linetype, bool absolute, bool topMost)
+        public CurveDisplayAttribute(Color color, float thickness, Linetype linetype, bool topMost)
         {
             this.Colour = color;
             this.Thickness = thickness;
             this.LineType = linetype;
-            this.Absolute = absolute;
             this.TopMost = topMost;
         }
     }

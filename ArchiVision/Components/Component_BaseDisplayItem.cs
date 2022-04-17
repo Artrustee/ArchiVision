@@ -43,13 +43,11 @@ namespace ArchiVision
         }
 
 
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
         protected sealed override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            this.Hidden = true;
             pManager.AddParameter(new Param_DisplayItem());
         }
 

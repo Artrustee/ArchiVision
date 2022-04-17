@@ -56,14 +56,13 @@ namespace ArchiVision.Components
             pManager.AddNumberParameter("Thickness", "t", "Thickness", GH_ParamAccess.item, 2);
             _lineType = (Param_Integer)pManager[pManager.AddIntegerParameter("LineType", "T", "LintType", GH_ParamAccess.item, -1)];
             UpdateNamedValue();
-            pManager.AddBooleanParameter("Absolute", "A", "Absolute", GH_ParamAccess.item, true);
             pManager.AddBooleanParameter("TopMost", "M", "TopMost", GH_ParamAccess.item, false);
         }
 
         private void UpdateNamedValue()
         {
             if (_lineType == null) return;
-            _lineType.AddNamedValue("Continuous", -1);
+            _lineType.AddNamedValue(Rhino.RhinoDoc.ActiveDoc.Linetypes.FindIndex(-1).Name, -1);
             foreach (var type in Rhino.RhinoDoc.ActiveDoc.Linetypes)
             {
                 if(type.HasIndex && type.HasName)
@@ -96,13 +95,12 @@ namespace ArchiVision.Components
             DA.GetData(0, ref colour);
             DA.GetData(1, ref thickness);
             DA.GetData(2, ref lineT);
-            DA.GetData(3, ref abso);
-            DA.GetData(4, ref topMost);
+            DA.GetData(3, ref topMost);
 
             Linetype realtype = Rhino.RhinoDoc.ActiveDoc.Linetypes.FindIndex(lineT);
             this.Message = realtype.Name;
 
-            DA.SetData(0, new CurveDisplayAttribute(colour, thickness, realtype, abso, topMost));
+            DA.SetData(0, new CurveDisplayAttribute(colour, (float)thickness, realtype, topMost));
 
             UpdateNamedValue();
         }

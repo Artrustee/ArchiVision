@@ -40,6 +40,8 @@ namespace ArchiVision
                         result.AddRange(item.VolatileData.AllData(true).Select(goo => ((GH_DisplayItem)goo).Value));
                     }
                 }
+
+
                 return result;
             }
         }
@@ -49,22 +51,21 @@ namespace ArchiVision
         protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
         {
             UpdateDrawInfo(e.Viewport);
+            base.CalculateBoundingBox(e);
 
             //Add the Draw Plane to the Bounding box.
             BoundingBox box = BoundingBox.Empty;
-            DrawRect.ToNurbsCurve().Offset(DrawRect.Plane, Math.Max(DrawRect.Width, DrawRect.Height) / 4, Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance, CurveOffsetCornerStyle.Sharp).ToList().ForEach((curve) =>
-            {
-                box.Union(curve.GetBoundingBox(false));
-            });
+            //DrawRect.ToNurbsCurve().Offset(DrawRect.Plane, Math.Max(DrawRect.Width, DrawRect.Height) / 4, Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance, CurveOffsetCornerStyle.Sharp).ToList().ForEach((curve) =>
+            //{
+            //});
+
+            box.Union(DrawRect.ToNurbsCurve().GetBoundingBox(true));
+
+            // Add every display item's clipping box.
+            DisplayItems.ForEach((item) => box.Union(item.ClippingBox));
 
             e.IncludeBoundingBox(box);
 
-            // Add every display item's clipping box.
-            BoundingBox b = BoundingBox.Empty;
-            DisplayItems.ForEach((item) => b.Union(item.ClippingBox));
-
-            e.IncludeBoundingBox(b);
-            base.CalculateBoundingBox(e);
         }
 
         protected override void DrawForeground(DrawEventArgs e)
@@ -85,9 +86,9 @@ namespace ArchiVision
 
             Point3d[] m_viewCorners = new Point3d[3]
             {
-                (m_farCorners[0] * 0.15 + m_nearCorners[0] * 0.85),
-                (m_farCorners[1] * 0.15 + m_nearCorners[1] * 0.85),
-                (m_farCorners[2] * 0.15 + m_nearCorners[2] * 0.85)
+                (m_farCorners[0] * 0.5 + m_nearCorners[0] * 0.5),
+                (m_farCorners[1] * 0.5 + m_nearCorners[1] * 0.5),
+                (m_farCorners[2] * 0.5 + m_nearCorners[2] * 0.5)
             };
 
             //e.Viewport.GetNearRect();

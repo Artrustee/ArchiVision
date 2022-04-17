@@ -19,12 +19,12 @@ namespace ArchiVision
     public class ArrowCurveDisplayItem : CurveDisplayItem
     {
 
-        public bool StartArrow { get; protected set; }
-        public bool EndArrow { get; protected set; }
+        public double StartArrow { get; protected set; }
+        public double EndArrow { get; protected set; }
 
         public double ArrowMult { get; protected set; }
 
-        public ArrowCurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, CurveDisplayAttribute att, bool start, bool end, double mult)
+        public ArrowCurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, CurveDisplayAttribute att, double start, double end, double mult)
             :base(owner, curve, att)
         {
             StartArrow = start;
@@ -32,7 +32,7 @@ namespace ArchiVision
             ArrowMult = mult;
         }
 
-        public ArrowCurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, Color color, float thickness, Linetype linetype, bool start, bool end, double mult, bool absolute)
+        public ArrowCurveDisplayItem(IGH_DocumentObject owner, GH_Curve curve, Color color, float thickness, Linetype linetype, double start, double end, double mult, bool absolute)
             : base(owner,curve, color, thickness, linetype, absolute)
         {
             StartArrow = start;
@@ -47,10 +47,10 @@ namespace ArchiVision
             Curve curve = ((GH_Curve)Geometry).Value;
             double arrowSize = Size * ArrowMult;
 
-            if (StartArrow)
-                Display.DrawArrowHead(curve.PointAtStart, -curve.TangentAtStart, Colour, arrowSize, arrowSize);
-            if (EndArrow)
-                Display.DrawArrowHead(curve.PointAtEnd , curve.TangentAtEnd, Colour, arrowSize, arrowSize);
+            if (StartArrow > 0)
+                Display.DrawArrowHead(curve.PointAtStart - curve.TangentAtStart * StartArrow, -curve.TangentAtStart, Colour, arrowSize, arrowSize);
+            if (EndArrow > 0)
+                Display.DrawArrowHead(curve.PointAtEnd + curve.TangentAtEnd * EndArrow, curve.TangentAtEnd, Colour, arrowSize, arrowSize);
         }
     }
 }

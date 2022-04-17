@@ -23,7 +23,7 @@ namespace ArchiVision
         //private ArchiVisionConduitForParam<T> _conduit;
         #region Basic Component info
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// Provides an Icon for the component.

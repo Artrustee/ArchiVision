@@ -56,8 +56,8 @@ namespace ArchiVision
 
             AddSection(pManager);
 
-            pManager.AddBooleanParameter("Start Arrow", "S", "Start Arrow", GH_ParamAccess.item, false);
-            pManager.AddBooleanParameter("End Arrow", "E", "End Arrow", GH_ParamAccess.item, false);
+            pManager.AddNumberParameter("Start Arrow", "S", "Start Arrow", GH_ParamAccess.item, -1);
+            pManager.AddNumberParameter("End Arrow", "E", "End Arrow", GH_ParamAccess.item, -1);
             pManager.AddNumberParameter("Arrow Mult", "M", "Arrow Mult, bigger than 1!", GH_ParamAccess.item, 10);
         }
 
@@ -70,8 +70,8 @@ namespace ArchiVision
             GH_Curve curve = null;
             CurveDisplayAttribute att = new CurveDisplayAttribute();
 
-            bool start = false;
-            bool end = false;
+            double start = -1;
+            double end = -1;
             double mult = 10;
 
             DA.GetData(0, ref curve);

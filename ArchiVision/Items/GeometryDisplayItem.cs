@@ -21,7 +21,7 @@ namespace ArchiVision
         private Color _color;
         public Color Colour
         {
-            get => _color;
+            get => Selected ? SelectedColor : _color;
             set => _color = value;
         }
 
@@ -29,11 +29,11 @@ namespace ArchiVision
 
         public DisplayMaterial Material
         {
-            get => _material;
+            get => Selected ? SelectedMaterial : _material;
             set 
             { 
                 _material = value;
-                _color = value.Diffuse;
+                _color = value?.Diffuse ?? Color.Transparent;
             }
         }
 

@@ -15,12 +15,12 @@ using System.Drawing;
 
 namespace ArchiVision
 {
-    public class CurveRenderItemComponent : BaseRenderItemComponent
+    public class Component_CurveDisplayItem : Component_BaseDisplayItem
     {
         #region Values
         #region Basic Component info
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.secondary;
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -39,8 +39,8 @@ namespace ArchiVision
         /// <summary>
         /// Initializes a new instance of the CurveRenderItemComponent class.
         /// </summary>
-        public CurveRenderItemComponent()
-          : base("Curve Render Item", "Crv RI", "Curve Render Item")
+        public Component_CurveDisplayItem()
+          : base("Curve Display Item", "Crv DI", "Curve Display Item")
         {
         }
 
@@ -51,13 +51,13 @@ namespace ArchiVision
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddCurveParameter("Curve", "C", "Curve", GH_ParamAccess.item);
-            pManager.AddParameter(new CurveRenderAttributeParameter());
+            pManager.AddParameter(new Param_CurveDisplayAttribute());
             pManager[1].Optional = true;
 
             AddSection(pManager);
 
-            pManager.AddBooleanParameter("Start Arrow", "S", "Start Arrow", GH_ParamAccess.item, false);
-            pManager.AddBooleanParameter("End Arrow", "E", "End Arrow", GH_ParamAccess.item, false);
+            pManager.AddNumberParameter("Start Arrow", "S", "Start Arrow", GH_ParamAccess.item, -1);
+            pManager.AddNumberParameter("End Arrow", "E", "End Arrow", GH_ParamAccess.item, -1);
             pManager.AddNumberParameter("Arrow Mult", "M", "Arrow Mult, bigger than 1!", GH_ParamAccess.item, 10);
         }
 
@@ -68,10 +68,10 @@ namespace ArchiVision
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             GH_Curve curve = null;
-            CurveRenderAttribute att = new CurveRenderAttribute();
+            CurveDisplayAttribute att = new CurveDisplayAttribute();
 
-            bool start = false;
-            bool end = false;
+            double start = -1;
+            double end = -1;
             double mult = 10;
 
             DA.GetData(0, ref curve);
@@ -83,7 +83,7 @@ namespace ArchiVision
 
             mult = Math.Max(mult, 1);
 
-            DA.SetData(0, new ArrowCurveRenderItem(curve, att, start ,end, mult));
+            DA.SetData(0, new ArrowCurveDisplayItem(this, curve, att, start ,end, mult));
         }
         #endregion
     }

@@ -130,15 +130,6 @@
   <data name="CurveRenderItemComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CurveRenderItemComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ElementGridPropertyComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ElementGridPropertyComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ElementPropertyComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ElementPropertyComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="GridElementComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GridElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MergedRenderItemComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MergedRenderItemComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -148,25 +139,7 @@
   <data name="RenderItemParameter_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RenderItemParameter_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RhinoViewElementComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RhinoViewElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RhinoViewPropertyElementComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RhinoViewPropertyElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SliderElementComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SliderElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UIElementParameter_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UIElementParameter_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WindowAddElementComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WindowAddElementComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WindowComponent_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WindowComponent_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WindowParameter_24-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WindowParameter_24-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

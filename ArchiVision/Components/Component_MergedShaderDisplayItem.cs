@@ -11,7 +11,7 @@ namespace ArchiVision
         #region Values
         #region Basic Component info
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.

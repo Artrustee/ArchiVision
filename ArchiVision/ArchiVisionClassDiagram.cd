@@ -1,67 +1,208 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ArchiVision.DisplayItem">
-    <Position X="6" Y="1.25" Width="1.5" />
+  <Comment CommentText="GH_Goo">
+    <Position X="23.251" Y="13.76" Height="0.291" Width="0.794" />
+  </Comment>
+  <Comment CommentText="Datas">
+    <Position X="23.136" Y="17.474" Height="0.291" Width="0.744" />
+  </Comment>
+  <Comment CommentText="Parameters">
+    <Position X="22.959" Y="7.885" Height="0.291" Width="1.046" />
+  </Comment>
+  <Comment CommentText="Components">
+    <Position X="1.186" Y="6.751" Height="0.291" Width="1.046" />
+  </Comment>
+  <Class Name="ArchiVision.Component_ArchiVision">
+    <Position X="6" Y="4.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAQAACAA=</HashCode>
-      <FileName>Items\DisplayItem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Component_ArchiVision.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchiVision.SizableDisplayIItem">
-    <Position X="2.75" Y="7.5" Width="1.5" />
+  <Class Name="ArchiVision.Component_BaseDisplayItem">
+    <Position X="4" Y="6.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAACAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
-      <FileName>Items\SizableDisplayIItem.cs</FileName>
+      <HashCode>AAIABAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Component_BaseDisplayItem.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchiVision.AttributeDisplayItem">
-    <Position X="4.75" Y="4.5" Width="1.5" />
+  <Class Name="ArchiVision.Component_CurveDisplayItem">
+    <Position X="4.25" Y="9.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAABAAgAA=</HashCode>
-      <FileName>Items\AttributeDisplayItem.cs</FileName>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAEAABAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Components\Component_CurveDisplayItem.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchiVision.CurveDisplayItem">
-    <Position X="2.75" Y="10" Width="1.5" />
+  <Class Name="ArchiVision.Component_MergedShaderDisplayItem">
+    <Position X="0.5" Y="9.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAhAAAIAAAIAAAgAAAAAAAAA=</HashCode>
-      <FileName>Items\CurveDisplayItem.cs</FileName>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAEAABAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Components\Component_MergedShaderDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.Components.Component_CurveDisplayItemAttribute">
+    <Position X="10.5" Y="6.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAAAAAAAAAABAAAEEAABIAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Components\Component_CurveDisplayItemAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.RhinoViewComponent.Component_ShaderRenderItem">
+    <Position X="7.25" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAEAABAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Components\Component_ShaderRenderItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ArchiVision.ArrowCurveDisplayItem">
-    <Position X="0.75" Y="10.25" Width="1.5" />
+    <Position X="0.75" Y="15.25" Width="2.75" />
+    <InheritanceLine Type="ArchiVision.CurveDisplayItem" FixedFromPoint="true">
+      <Path>
+        <Point X="5.5" Y="18.188" />
+        <Point X="5.125" Y="18.188" />
+        <Point X="5.125" Y="16.381" />
+        <Point X="3.5" Y="16.381" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>QAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Items\ArrowCurveDisplayItem.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchiVision.MeshOutlineDisplayItem">
-    <Position X="5" Y="10" Width="1.5" />
+  <Class Name="ArchiVision.CurveDisplayAttribute">
+    <Position X="20" Y="17" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAAAAAAAABAAAAACSAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAAAAABAAAAAAAAgAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Items\CurveDisplayAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.CurveDisplayItem">
+    <Position X="5.5" Y="16.5" Width="2.5" />
+    <InheritanceLine Type="ArchiVision.GeometryDisplayItem" FixedFromPoint="true">
+      <Path>
+        <Point X="10.25" Y="18" />
+        <Point X="8" Y="18" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAhAAAIAACIAAAgAAAAAAAAA=</HashCode>
+      <FileName>Items\CurveDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.DisplayItem">
+    <Position X="15.75" Y="16.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAQAACAI=</HashCode>
+      <FileName>Items\DisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.GeometryDisplayItem">
+    <Position X="10.25" Y="16.5" Width="1.75" />
+    <InheritanceLine Type="ArchiVision.DisplayItem" FixedFromPoint="true">
+      <Path>
+        <Point X="15.75" Y="18" />
+        <Point X="12" Y="18" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAICAAAAAAAAAAAAAAACAAACAAAABQAgAA=</HashCode>
+      <FileName>Items\GeometryDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.MergedMeshDisplayItem">
+    <Position X="10" Y="14.25" Width="2" />
+    <InheritanceLine Type="ArchiVision.DisplayItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.75" Y="18" />
+        <Point X="14.22" Y="18" />
+        <Point X="14.22" Y="15.312" />
+        <Point X="12" Y="15.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAgEAAA=</HashCode>
+      <FileName>Items\MergedMeshDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.MeshOutlineDisplayItem">
+    <Position X="0.75" Y="18.5" Width="2" />
+    <InheritanceLine Type="ArchiVision.CurveDisplayItem" FixedFromPoint="true">
+      <Path>
+        <Point X="5.5" Y="18.188" />
+        <Point X="5.125" Y="18.188" />
+        <Point X="5.125" Y="19.438" />
+        <Point X="2.75" Y="19.438" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Items\MeshOutlineDisplayItem.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchiVision.Param_DisplayItem">
-    <Position X="13" Y="3.75" Width="1.5" />
+  <Class Name="ArchiVision.MeshRenderItem">
+    <Position X="5.75" Y="13.5" Width="1.75" />
+    <InheritanceLine Type="ArchiVision.GeometryDisplayItem" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.25" Y="18" />
+        <Point X="9.75" Y="18" />
+        <Point X="9.75" Y="14.562" />
+        <Point X="7.5" Y="14.562" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>gFAABAAABAAABAAAABAAABAQAAAACAAAAAAAIAEECCA=</HashCode>
-      <FileName>Parameters\Param_DisplayItem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAACAA=</HashCode>
+      <FileName>Items\MeshRenderItem.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArchiVision.PointDisplayItem">
+    <Position X="5.75" Y="20" Width="1.75" />
+    <InheritanceLine Type="ArchiVision.GeometryDisplayItem" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.25" Y="18" />
+        <Point X="9.75" Y="18" />
+        <Point X="9.75" Y="21.062" />
+        <Point X="7.5" Y="21.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ABAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\PointDisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.Parameters.Param_ArchiVision&lt;T&gt;">
+    <Position X="18.25" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Parameters\Param_ArchiVision.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Class Name="ArchiVision.Param_CurveDisplayAttribute">
-    <Position X="15.25" Y="3.75" Width="1.5" />
+    <Position X="19.25" Y="7" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Parameters\Param_CurveDisplayAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchiVision.Parameters.Param_ArchiVision&lt;T&gt;">
-    <Position X="14.25" Y="1.5" Width="1.5" />
+  <Class Name="ArchiVision.Param_DisplayItem">
+    <Position X="16" Y="7" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Parameters\Param_ArchiVision.cs</FileName>
+      <HashCode>gFAABAAABAAAAAAAABAAABAQAAAACAAAAAAAIAEECAA=</HashCode>
+      <FileName>Parameters\Param_DisplayItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArchiVision.GH_CurveRenderAttribute">
+    <Position X="19.75" Y="12.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAACAQAAAAAAAAEAAgAAAAAAAAAIBAAAAAAAAAAAAE=</HashCode>
+      <FileName>Types\GH_CurveRenderAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.GH_DisplayItem">
+    <Position X="16" Y="12.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAQAAAAAAAAEAAgAAAAAAAAAIBAAAAAAAAAAAAE=</HashCode>
+      <FileName>Types\GH_DisplayItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

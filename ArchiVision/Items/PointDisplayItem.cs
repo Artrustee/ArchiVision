@@ -18,18 +18,20 @@ using System.Threading.Tasks;
 
 namespace ArchiVision
 {
-    public class PointRenderItem : SizableRenderItem
+    public class PointDisplayItem : GeometryDisplayItem
     {
         public PointStyle PtStyle { get; protected set; }
-
-        public PointRenderItem(GH_Point point, Color color, PointStyle style, float radius, bool absolute)
-            :base(point, radius, absolute, color)
+        public float Radius { get; protected set; }
+        public PointDisplayItem(IGH_DocumentObject owner, GH_Point point, Color color, PointStyle style, float radius, bool topMost)
+            :base(owner, point, topMost)
         {
             PtStyle = style;
+            Radius = radius;
+            Colour = color;
         }
-        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx, Color WireColour_Selected, DisplayMaterial ShadeMaterial_Selected, bool selected)
+        public override void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx)
         {
-            Display.DrawPoint(((GH_Point)Geometry).Value, PtStyle, (int)GetSize(Viewport, unitPerPx), Colour);
+            Display.DrawPoint(((GH_Point)Geometry).Value, PtStyle, Radius, Colour);
         }
     }
 }

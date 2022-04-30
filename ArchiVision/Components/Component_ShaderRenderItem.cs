@@ -1,11 +1,4 @@
-﻿/*  Copyright 2021 RadiRhino-秋水. All Rights Reserved.
-
-    Distributed under MIT license.
-
-    See file LICENSE for detail or copy at http://opensource.org/licenses/MIT
-*/
-
-using Grasshopper.Kernel;
+﻿using Grasshopper.Kernel;
 using Grasshopper.Kernel.Components;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
@@ -22,7 +15,7 @@ namespace ArchiVision.RhinoViewComponent
         #region Values
         #region Basic Component info
 
-        public override GH_Exposure Exposure => GH_Exposure.primary;
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -82,7 +75,7 @@ namespace ArchiVision.RhinoViewComponent
             GH_Mesh mesh = null;
             GH_Material mate = null;
 
-            if (DA.GetData(0, ref mesh) && DA.GetData(1, ref mate) && mate.IsValid)
+            if (DA.GetData(0, ref mesh))
             {
                 CurveDisplayAttribute naked = null;
                 CurveDisplayAttribute interior = null;
@@ -90,6 +83,7 @@ namespace ArchiVision.RhinoViewComponent
                 CurveDisplayAttribute outline = null;
 
                 double angle = Math.PI / 6;
+                DA.GetData(1, ref mate);
                 DA.GetData(2, ref angle);
                 if (((Param_Number)Params.Input[2]).UseDegrees)
                     angle = RhinoMath.ToRadians(angle);
@@ -98,10 +92,7 @@ namespace ArchiVision.RhinoViewComponent
                 DA.GetData(5, ref sharp);
                 DA.GetData(6, ref outline);
 
-                if (mate.Value != null)
-                {
-                    DA.SetData(0, new MeshRenderItem(this, mesh, mate, naked, interior, outline, sharp, angle));
-                }
+                DA.SetData(0, new MeshRenderItem(this, mesh, mate, naked, interior, outline, sharp, angle));
             }
         }
         #endregion

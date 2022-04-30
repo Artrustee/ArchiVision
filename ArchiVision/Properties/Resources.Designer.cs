@@ -103,36 +103,6 @@ namespace ArchiVision.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ElementGridPropertyComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("ElementGridPropertyComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ElementPropertyComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("ElementPropertyComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap GridElementComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("GridElementComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap MergedRenderItemComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("MergedRenderItemComponent_24-24", resourceCulture);
@@ -163,69 +133,9 @@ namespace ArchiVision.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap RhinoViewElementComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("RhinoViewElementComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RhinoViewPropertyElementComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("RhinoViewPropertyElementComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SliderElementComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("SliderElementComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap UIElementParameter_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("UIElementParameter_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WindowAddElementComponent_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("WindowAddElementComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap WindowComponent_24_24 {
             get {
                 object obj = ResourceManager.GetObject("WindowComponent_24-24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WindowParameter_24_24 {
-            get {
-                object obj = ResourceManager.GetObject("WindowParameter_24-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

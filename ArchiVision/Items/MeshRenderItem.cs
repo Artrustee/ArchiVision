@@ -42,7 +42,7 @@ namespace ArchiVision
         public MeshRenderItem(IGH_DocumentObject owner, GH_Mesh geometry, GH_Material material, CurveDisplayAttribute nakedEdgeAtt, CurveDisplayAttribute interiorEdgeAtt, CurveDisplayAttribute outLineAtt, CurveDisplayAttribute sharpEdgeAtt, double angle)
             :base(owner, geometry, false)
         {
-			Material = material.Value;
+			Material = material?.Value;
 			OutLineAtt = outLineAtt;
 
 			SubRenderItem.Clear();
@@ -105,7 +105,7 @@ namespace ArchiVision
 
         public override void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display, Rectangle3d drawRect, double unitPerPx)
         {
-            Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, Material);
+            if (Material != null) Display.DrawMeshShaded(((GH_Mesh)Geometry).Value, Material);
 
             base.DrawViewportMeshes(Viewport, Display, drawRect, unitPerPx);
         }

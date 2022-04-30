@@ -1,11 +1,4 @@
-﻿/*  Copyright 2021 RadiRhino-秋水. All Rights Reserved.
-
-    Distributed under MIT license.
-
-    See file LICENSE for detail or copy at http://opensource.org/licenses/MIT
-*/
-
-using Grasshopper.Kernel;
+﻿using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
@@ -54,8 +47,8 @@ namespace ArchiVision
         protected void AddShaderParam(GH_Component.GH_InputParamManager pManager)
         {
             Param_OGLShader param_OGLShader = new Param_OGLShader();
-            param_OGLShader.SetPersistentData(new GH_Material(Color.White));
-            pManager.AddParameter(param_OGLShader, "Material", "M", "The material override", GH_ParamAccess.item);
+            //param_OGLShader.SetPersistentData(new GH_Material(Color.White));
+            pManager[pManager.AddParameter(param_OGLShader, "Material", "M", "The material override", GH_ParamAccess.item)].Optional = true;
         }
     }
 }

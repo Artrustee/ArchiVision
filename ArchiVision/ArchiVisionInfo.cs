@@ -25,4 +25,13 @@ namespace ArchiVision
         //Return a string representing your preferred contact details.
         public override string AuthorContact => "1123993881@qq.com";
     }
+
+    public class ArchiVisionPriority : GH_AssemblyPriority
+    {
+        public override GH_LoadingInstruction PriorityLoad()
+        {
+            Grasshopper.Instances.ComponentServer.AddCategoryIcon("ArchiVision", Properties.Resources.WindowComponent_24_24);
+            return GH_LoadingInstruction.Proceed;
+        }
+    }
 }

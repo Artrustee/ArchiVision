@@ -22,7 +22,6 @@ namespace ArchiVision
     /// </summary>
     public abstract class DisplayItem
     {
-
         protected List<DisplayItem> SubRenderItem { get; } = new List<DisplayItem>();
         public bool IsTopMost { get; }
         private IGH_DocumentObject _owner;
@@ -43,13 +42,13 @@ namespace ArchiVision
             _owner = owner;
         }
 
-        public virtual void DrawViewportWires( RhinoViewport Viewport, DisplayPipeline Display,
+        public virtual void DrawViewportWires(RhinoViewport Viewport, DisplayPipeline Display,
             Rectangle3d drawRect, double unitPerPx)
         {
 
         }
 
-        public virtual void DrawViewportMeshes( RhinoViewport Viewport, DisplayPipeline Display,
+        public virtual void DrawViewportMeshes(RhinoViewport Viewport, DisplayPipeline Display,
             Rectangle3d drawRect, double unitPerPx)
         {
 

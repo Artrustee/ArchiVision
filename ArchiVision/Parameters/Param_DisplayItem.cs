@@ -114,14 +114,14 @@ namespace ArchiVision
             m_data.ToList().ForEach((item) => item.Value.DrawViewportMeshes(args.Viewport, args.Display, base.Attributes.Selected));
         }
 
-        public List<DisplayItem> FindRenderItems(RhinoViewport viewport)
-        {
-            List<DisplayItem> result = new List<DisplayItem>();
-            foreach (GH_DisplayItem value in m_data)
-            {
-                result.Add(value.Value);
-            }
-            return result;
-        }
+        //public List<DisplayItem> FindRenderItems(RhinoViewport viewport)
+        //{
+        //    List<DisplayItem> result = new List<DisplayItem>();
+        //    foreach (GH_DisplayItem value in m_data)
+        //    {
+        //        result.Add(value.Value);
+        //    }
+        //    return result;
+        //}
     }
 }

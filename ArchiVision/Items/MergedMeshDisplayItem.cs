@@ -14,7 +14,7 @@ namespace ArchiVision
 {
     public class MergedMeshDisplayItem: DisplayItem
     {
-        public MergedMeshDisplayItem(IGH_DocumentObject owner, List<MeshRenderItem> meshRenderItems, CurveDisplayAttribute outlineAttribute, CurveDisplayAttribute intersectAttribute)
+        public MergedMeshDisplayItem(IGH_DocumentObject owner, List<MeshDisplayItem> meshRenderItems, CurveDisplayAttribute outlineAttribute, CurveDisplayAttribute intersectAttribute)
             : base(owner, false)
         {
             SubRenderItem.Clear();

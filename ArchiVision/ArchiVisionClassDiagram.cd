@@ -27,7 +27,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ArchiVision.Component_CurveDisplayItem">
-    <Position X="4.25" Y="9.5" Width="2.25" />
+    <Position X="3.75" Y="9.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAABAAAAEAABAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Components\Component_CurveDisplayItem.cs</FileName>
@@ -41,14 +41,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ArchiVision.Components.Component_CurveDisplayItemAttribute">
-    <Position X="10.5" Y="6.5" Width="3" />
+    <Position X="11.75" Y="6.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAIABAAAAAAAAAAAABAAAEEAABIAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Components\Component_CurveDisplayItemAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ArchiVision.RhinoViewComponent.Component_ShaderRenderItem">
-    <Position X="7.25" Y="9.5" Width="2.5" />
+    <Position X="6.25" Y="9.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAABAAAAEAABAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Components\Component_ShaderRenderItem.cs</FileName>
@@ -203,6 +203,13 @@
     <TypeIdentifier>
       <HashCode>AAAACAQAAAAAAAAEAAgAAAAAAAAAIBAAAAAAAAAAAAE=</HashCode>
       <FileName>Types\GH_DisplayItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchiVision.Components.Component_PointDisplayItem">
+    <Position X="9" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAEAABAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Components\Component_PointDisplayItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -54,7 +54,7 @@ namespace ArchiVision
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<MeshRenderItem> meshRenderItems = new List<MeshRenderItem>();
+            List<MeshDisplayItem> meshRenderItems = new List<MeshDisplayItem>();
             CurveDisplayAttribute interAtt = null;
             CurveDisplayAttribute outAtt = null;
 

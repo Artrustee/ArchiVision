@@ -65,7 +65,7 @@ namespace ArchiVision.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap ConstructRenderItemComponent_24_24 {
             get {
-                object obj = ResourceManager.GetObject("ConstructRenderItemComponent_24-24", resourceCulture);
+                object obj = ResourceManager.GetObject("ConstructRenderItemComponent_24_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
